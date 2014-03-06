@@ -1,0 +1,13 @@
+*.class
+*.iml
+*.ipr
+*.iws
+.classpath
+.idea
+.nbproject
+.project
+.settings
+target
+derby.log
+tmp
+*.synctex.gz
