@@ -7,89 +7,82 @@ import dst.ass1.jpa.model.ITask;
 import dst.ass1.jpa.model.IUser;
 
 public class User extends AbstractPerson implements IUser {
+	
+	private String username;
+	private byte[] password;
+	private String accountNo;
+	private String bankCode;
+	private List<ITask> tasks;
+	private List<IMembership> memberships;
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.username;
 	}
 
 	@Override
 	public void setUsername(String username) {
-		// TODO Auto-generated method stub
-
+		this.username = username;
 	}
 
 	@Override
 	public byte[] getPassword() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.password;
 	}
 
 	@Override
 	public void setPassword(byte[] password) {
-		// TODO Auto-generated method stub
-
+		this.password = password;
 	}
 
 	@Override
 	public String getAccountNo() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.accountNo;
 	}
 
 	@Override
 	public void setAccountNo(String accountNo) {
-		// TODO Auto-generated method stub
-
+		this.accountNo = accountNo;
 	}
 
 	@Override
 	public String getBankCode() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.bankCode;
 	}
 
 	@Override
 	public void setBankCode(String bankCode) {
-		// TODO Auto-generated method stub
-
+		this.bankCode = bankCode;
 	}
 
 	@Override
 	public List<ITask> getTasks() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.tasks;
 	}
 
 	@Override
 	public void setTasks(List<ITask> tasks) {
-		// TODO Auto-generated method stub
-
+		this.tasks = tasks;
 	}
 
 	@Override
 	public void addTask(ITask task) {
-		// TODO Auto-generated method stub
-
+		this.tasks.add(task);
 	}
 
 	@Override
 	public void addMembership(IMembership membership) {
-		// TODO Auto-generated method stub
-
+		this.memberships.add(membership);
 	}
 
 	@Override
 	public List<IMembership> getMemberships() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.memberships;
 	}
 
 	@Override
 	public void setMemberships(List<IMembership> memberships) {
-		// TODO Auto-generated method stub
-
+		this.memberships = memberships;
 	}
 
 }
