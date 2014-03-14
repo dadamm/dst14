@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import dst.ass1.AbstractTest;
 import dst.ass1.jpa.lifecycle.EMLifecycleDemo;
+import dst.ass1.jpa.util.ExceptionUtils;
 
 public class Test_4a extends AbstractTest {
 
@@ -22,7 +23,7 @@ public class Test_4a extends AbstractTest {
 		try {
 			demo.demonstrateEntityMangerLifecycle();
 		} catch (Exception e) {
-			fail("No Exception expected but got: " + e.getMessage());
+			fail(ExceptionUtils.getMessage(e));
 		}
 	}
 }
