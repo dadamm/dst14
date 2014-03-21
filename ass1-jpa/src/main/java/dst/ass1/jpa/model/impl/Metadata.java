@@ -2,12 +2,23 @@ package dst.ass1.jpa.model.impl;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import dst.ass1.jpa.model.IMetadata;
 
+@Entity
 public class Metadata implements IMetadata {
 	
+	@Id
 	private Long id;
+	
+	@Column(name = "context")
 	private String context;
+	
+	@ElementCollection
 	private List<String> settings;
 
 	@Override

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<entity-mappings version="1.0" xmlns="http://java.sun.com/xml/ns/persistence/orm"
+<entity-mappings version="2.0" xmlns="http://java.sun.com/xml/ns/persistence/orm"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
-    http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+    http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
     
     <entity class="dst.ass1.jpa.model.impl.TaskWorker" access="FIELD">
     	<attributes>
@@ -17,7 +17,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
     			<column name="workunitcapacity"/>
     		</basic>
     		<basic name="location">
-    			<column name="location"/>
+    			<column name="location" length="50"/>
     		</basic>
     		<basic name="joinedDate">
     			<column name="joineddate"/>
@@ -25,10 +25,10 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
     		<basic name="lastTraining">
     			<column name="lasttraining"/>
     		</basic>
-    		<many-to-one name="taskForce" fetch="LAZY">
+    		<many-to-one name="taskForce" fetch="LAZY" target-entity="dst.ass1.jpa.model.impl.TaskForce">
     			<join-column name="taskforce_id"/>
     		</many-to-one>
-    		<many-to-many name="taskProcessings" target-entity="dst.ass1.jpa.model.ITaskProcessing" mapped-by="taskWorkers" fetch="LAZY"/>
+    		<many-to-many name="taskProcessings" target-entity="dst.ass1.jpa.model.impl.TaskProcessing" mapped-by="taskWorkers" fetch="LAZY"/>
     	</attributes>
     </entity>
     

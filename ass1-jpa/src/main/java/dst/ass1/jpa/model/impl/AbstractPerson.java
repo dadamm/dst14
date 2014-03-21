@@ -1,14 +1,34 @@
 package dst.ass1.jpa.model.impl;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+
 import dst.ass1.jpa.model.IAddress;
 import dst.ass1.jpa.model.IPerson;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "person")
 public abstract class AbstractPerson implements IPerson {
 	
+	@Id
+	@Column(name = "id")
 	private Long id;
+	
+	@Column(name = "lastname")
 	private String lastName;
+	
+	@Column(name = "firstname")
 	private String firstName;
-	private IAddress address;
+	
+	// TODO is not possible to use interface
+	@Embedded
+	private Address address;
 
 	@Override
 	public Long getId() {
@@ -47,7 +67,9 @@ public abstract class AbstractPerson implements IPerson {
 
 	@Override
 	public void setAddress(IAddress address) {
-		this.address = address;
+		if(address instanceof Address) {
+			this.address = (Address) address;
+		} else throw new IllegalArgumentException("The argument is not a type of Address");
 	}
 
 }

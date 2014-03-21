@@ -15,6 +15,7 @@ public class TaskWorker implements ITaskWorker {
 	private String location;
 	private Date joinedDate;
 	private Date lastTraining;
+	
 	private ITaskForce taskForce;
 	private List<ITaskProcessing> taskProcessings;
 

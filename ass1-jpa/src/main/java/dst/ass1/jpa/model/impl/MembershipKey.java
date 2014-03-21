@@ -1,13 +1,23 @@
 package dst.ass1.jpa.model.impl;
 
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+import javax.persistence.Transient;
+
 import dst.ass1.jpa.model.IMembershipKey;
 import dst.ass1.jpa.model.IUser;
 import dst.ass1.jpa.model.IWorkPlatform;
 
-public class MembershipKey implements IMembershipKey {
+@Embeddable
+public class MembershipKey implements IMembershipKey, Serializable {
 	
-	private IUser user;
-	private IWorkPlatform workPlatform;
+	private static final long serialVersionUID = 5336920996779969887L;
+	private Long userId;
+	private Long workPlatformId;
+	
+	@Transient private IUser user;
+	@Transient private IWorkPlatform workPlatform;
 
 	@Override
 	public IUser getUser() {
@@ -27,6 +37,38 @@ public class MembershipKey implements IMembershipKey {
 	@Override
 	public void setWorkPlatform(IWorkPlatform platform) {
 		this.setWorkPlatform(platform);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result
+				+ ((workPlatformId == null) ? 0 : workPlatformId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MembershipKey other = (MembershipKey) obj;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		if (workPlatformId == null) {
+			if (other.workPlatformId != null)
+				return false;
+		} else if (!workPlatformId.equals(other.workPlatformId))
+			return false;
+		return true;
 	}
 
 }

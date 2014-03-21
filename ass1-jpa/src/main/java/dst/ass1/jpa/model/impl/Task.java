@@ -1,18 +1,44 @@
 package dst.ass1.jpa.model.impl;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+
 import dst.ass1.jpa.model.IMetadata;
 import dst.ass1.jpa.model.ITask;
 import dst.ass1.jpa.model.ITaskProcessing;
 import dst.ass1.jpa.model.IUser;
 
+@Entity
 public class Task implements ITask {
 	
+	@Id
 	private Long id;
+	
+	@Column(name = "assignedworkunits")
 	private Integer assignedWorkUnits;
+	
+	@Column(name = "processingtime")
 	private Integer processingTime;
+	
+	@Column(name = "paid")
 	private boolean paid;
+	
+	@ManyToOne(targetEntity = Metadata.class)
+	@JoinColumn(name = "metadata_id")
 	private IMetadata metadata;
+	
+	@ManyToOne(targetEntity = User.class)
+	@JoinColumn(name = "user_id")
 	private IUser user;
+	
+	@MapsId
+	@OneToOne(targetEntity = TaskProcessing.class)
+	@JoinColumn(name = "taskprocessing_id")
 	private ITaskProcessing taskProcessing;
 
 	@Override

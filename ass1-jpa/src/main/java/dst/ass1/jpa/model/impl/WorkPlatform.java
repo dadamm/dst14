@@ -3,17 +3,34 @@ package dst.ass1.jpa.model.impl;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import dst.ass1.jpa.model.IMembership;
 import dst.ass1.jpa.model.ITaskForce;
 import dst.ass1.jpa.model.IWorkPlatform;
 
+@Entity
 public class WorkPlatform implements IWorkPlatform {
 	
+	@Id
 	private Long id;
+	
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "loacation")
 	private String location;
+	
+	@Column(name = "costsperworkunit")
 	private BigDecimal costsPerWorkUnit;
+	
+	@OneToMany(mappedBy = "workPlatform", targetEntity = Membership.class)
 	private List<IMembership> memberships;
+	
+	@OneToMany(mappedBy = "workPlatform", targetEntity = TaskForce.class)
 	private List<ITaskForce> taskForces;
 
 	@Override

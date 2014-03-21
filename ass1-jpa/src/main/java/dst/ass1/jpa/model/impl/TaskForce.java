@@ -3,21 +3,51 @@ package dst.ass1.jpa.model.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
 import dst.ass1.jpa.model.IExpert;
 import dst.ass1.jpa.model.ITaskForce;
 import dst.ass1.jpa.model.ITaskWorker;
 import dst.ass1.jpa.model.IWorkPlatform;
 
+@Entity
 public class TaskForce implements ITaskForce {
 	
+	@Id
 	private Long id;
+	
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "lastmeeting")
 	private Date lastMeeting;
+	
+	@Column(name = "nextmeeting")
 	private Date nextMeeting;
+	
+	@Transient
+//	@OneToMany(targetEntity = TaskForce.class)
 	private List<ITaskForce> composedOf;
+	
+	@Transient
+//	@OneToMany(targetEntity = TaskForce.class)
 	private List<ITaskForce> partOf;
+	
+	@OneToMany(mappedBy = "taskForce", targetEntity = TaskWorker.class)
 	private List<ITaskWorker> taskWorkers;
+	
+	@ManyToOne(targetEntity = Expert.class)
+	@JoinColumn(name = "expert_id")
 	private IExpert expert;
+	
+	@ManyToOne(targetEntity = WorkPlatform.class)
+	@JoinColumn(name = "workplatform_id")
 	private IWorkPlatform workPlatform;
 
 	@Override
