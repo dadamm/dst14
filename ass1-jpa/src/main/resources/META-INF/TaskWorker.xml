@@ -5,6 +5,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
     http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
     
     <entity class="dst.ass1.jpa.model.impl.TaskWorker" access="FIELD">
+    	<table name="TaskWorker" />
     	<attributes>
     		<id name="id">
     			<column name="id"/>
