@@ -2,63 +2,64 @@ package dst.ass1.jpa.model;
 
 import java.io.Serializable;
 
+import dst.ass1.jpa.model.impl.Address;
+import dst.ass1.jpa.model.impl.Expert;
+import dst.ass1.jpa.model.impl.Membership;
+import dst.ass1.jpa.model.impl.MembershipKey;
+import dst.ass1.jpa.model.impl.Metadata;
+import dst.ass1.jpa.model.impl.Task;
+import dst.ass1.jpa.model.impl.TaskForce;
+import dst.ass1.jpa.model.impl.TaskProcessing;
+import dst.ass1.jpa.model.impl.TaskWorker;
+import dst.ass1.jpa.model.impl.User;
+import dst.ass1.jpa.model.impl.WorkPlatform;
+
 public class ModelFactory implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	public IAddress createAddress() {
-		// TODO
-		return null;
+		return new Address();
 	}
 
 	public IExpert createExpert() {
-		// TODO
-		return null;
+		return new Expert();
 	}
 
 	public ITaskForce createTaskForce() {
-		// TODO
-		return null;
+		return new TaskForce();
 	}
 
 	public ITaskWorker createTaskWorker() {
-		// TODO
-		return null;
+		return new TaskWorker();
 	}
 
 	public IMetadata createMetadata() {
-		// TODO
-		return null;
+		return new Metadata();
 	}
 
 	public ITaskProcessing createTaskProcessing() {
-		// TODO
-		return null;
+		return new TaskProcessing();
 	}
 
 	public IWorkPlatform createPlatform() {
-		// TODO
-		return null;
+		return new WorkPlatform();
 	}
 
 	public ITask createTask() {
-		// TODO
-		return null;
+		return new Task();
 	}
 
 	public IMembership createMembership() {
-		// TODO
-		return null;
+		return new Membership();
 	}
 
 	public IMembershipKey createMembershipKey() {
-		// TODO
-		return null;
+		return new MembershipKey();
 	}
 
 	public IUser createUser() {
-		// TODO
-		return null;
+		return new User();
 	}
 
 }
