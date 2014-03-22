@@ -9,10 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import dst.ass1.jpa.model.IExpert;
 import dst.ass1.jpa.model.ITaskForce;
@@ -37,12 +38,13 @@ public class TaskForce implements ITaskForce {
 	@Column(name = "nextmeeting")
 	private Date nextMeeting;
 	
-	@Transient
-//	@OneToMany(targetEntity = TaskForce.class)
+	@ManyToMany(targetEntity = TaskForce.class)
+	@JoinTable(name = "taskforce_composer_partof",
+		joinColumns = @JoinColumn(name = "composertaskforce_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name = "partoftaskforce_id", referencedColumnName = "id"))
 	private List<ITaskForce> composedOf;
 	
-	@Transient
-//	@OneToMany(targetEntity = TaskForce.class)
+	@ManyToMany(mappedBy = "composedOf", targetEntity = TaskForce.class)
 	private List<ITaskForce> partOf;
 	
 	@OneToMany(mappedBy = "taskForce", targetEntity = TaskWorker.class)
