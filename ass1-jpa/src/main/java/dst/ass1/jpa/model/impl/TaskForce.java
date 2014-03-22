@@ -5,24 +5,30 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import dst.ass1.jpa.model.IExpert;
 import dst.ass1.jpa.model.ITaskForce;
 import dst.ass1.jpa.model.ITaskWorker;
 import dst.ass1.jpa.model.IWorkPlatform;
+import dst.ass1.jpa.util.Constants;
 
 @Entity
+@Table(name = Constants.T_TASKFORCE)
 public class TaskForce implements ITaskForce {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "name")
+	@Column(name = "name", length = 50)
 	private String name;
 	
 	@Column(name = "lastmeeting")

@@ -2,21 +2,27 @@ package dst.ass1.jpa.model.impl;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import dst.ass1.jpa.model.IMetadata;
 import dst.ass1.jpa.model.ITask;
 import dst.ass1.jpa.model.ITaskProcessing;
 import dst.ass1.jpa.model.IUser;
+import dst.ass1.jpa.util.Constants;
 
 @Entity
+@Table(name = Constants.T_TASK)
 public class Task implements ITask {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "assignedworkunits")

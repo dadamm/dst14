@@ -5,23 +5,29 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import dst.ass1.jpa.model.IMembership;
 import dst.ass1.jpa.model.ITaskForce;
 import dst.ass1.jpa.model.IWorkPlatform;
+import dst.ass1.jpa.util.Constants;
 
 @Entity
+@Table(name = Constants.T_WORKPLATFORM)
 public class WorkPlatform implements IWorkPlatform {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "name")
+	@Column(name = "name", length = 50)
 	private String name;
 	
-	@Column(name = "loacation")
+	@Column(name = "loacation", length = 50)
 	private String location;
 	
 	@Column(name = "costsperworkunit")

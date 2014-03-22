@@ -5,24 +5,27 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import dst.ass1.jpa.model.IMembership;
 import dst.ass1.jpa.model.ITask;
 import dst.ass1.jpa.model.IUser;
+import dst.ass1.jpa.util.Constants;
 
 @Entity
+@Table(name = Constants.T_USER)
 public class User extends AbstractPerson implements IUser {
 
-	@Column(name = "username")
+	@Column(name = "username", length = 50)
 	private String username;
 	
-	@Column(name = "password")
+	@Column(name = "password", length = 16)
 	private byte[] password;
 	
-	@Column(name = "accountno")
+	@Column(name = "accountno", length = 6)
 	private String accountNo;
 	
-	@Column(name = "bankcode")
+	@Column(name = "bankcode", length = 30)
 	private String bankCode;
 	
 	@OneToMany(mappedBy = "user", targetEntity = Task.class)

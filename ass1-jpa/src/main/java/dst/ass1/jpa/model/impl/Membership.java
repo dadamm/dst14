@@ -8,16 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.Table;
 
 import dst.ass1.jpa.model.IMembership;
 import dst.ass1.jpa.model.IMembershipKey;
 import dst.ass1.jpa.model.IUser;
 import dst.ass1.jpa.model.IWorkPlatform;
+import dst.ass1.jpa.util.Constants;
 
 @Entity
+@Table(name = Constants.T_MEMBERSHIP)
 public class Membership implements IMembership {
 	
-	// TODO use interface
 	@EmbeddedId
 	private MembershipKey id;
 	
@@ -42,11 +44,11 @@ public class Membership implements IMembership {
 		return this.id;
 	}
 
-	// TODO change when interface is used
 	@Override
 	public void setId(IMembershipKey id) {
-		this.id = (MembershipKey) id;
-//		this.id = id;
+		if(id instanceof MembershipKey) {
+			this.id = (MembershipKey) id;
+		} else throw new IllegalArgumentException("The argument is not a type of MembershipKey");
 	}
 
 	@Override

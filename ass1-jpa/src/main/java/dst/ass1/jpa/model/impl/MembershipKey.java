@@ -44,8 +44,7 @@ public class MembershipKey implements IMembershipKey, Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		result = prime * result
-				+ ((workPlatformId == null) ? 0 : workPlatformId.hashCode());
+		result = prime * result	+ ((workPlatformId == null) ? 0 : workPlatformId.hashCode());
 		return result;
 	}
 

@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -19,13 +21,14 @@ import dst.ass1.jpa.model.ITask;
 import dst.ass1.jpa.model.ITaskProcessing;
 import dst.ass1.jpa.model.ITaskWorker;
 import dst.ass1.jpa.model.TaskStatus;
+import dst.ass1.jpa.util.Constants;
 
 @Entity
-@Table(name = "task_processing")
+@Table(name = Constants.T_TASKPROCESSING)
 public class TaskProcessing implements ITaskProcessing {
 	
 	@Id
-	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "start")
@@ -35,12 +38,13 @@ public class TaskProcessing implements ITaskProcessing {
 	private Date end;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name = "taskstatus", length = 10)
 	private TaskStatus taskStatus;
 	
 	@ManyToMany(targetEntity = TaskWorker.class)
-	@JoinTable(name = "task_worker_processing_rel",
-			joinColumns = @JoinColumn(name = "taskprocessing_id", referencedColumnName = "id"),
-			inverseJoinColumns = @JoinColumn(name = "taskworker_id", referencedColumnName = "id"))
+	@JoinTable(name = Constants.J_PROCESSING_TASKWORKER,
+			joinColumns = @JoinColumn(name = "TaskProcessings_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "TaskWorkers_id", referencedColumnName = "id"))
 	private List<ITaskWorker> taskWorkers;
 	
 	@OneToOne(targetEntity = Task.class)

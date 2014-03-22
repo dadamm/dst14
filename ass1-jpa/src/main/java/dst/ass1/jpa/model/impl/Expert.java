@@ -8,9 +8,10 @@ import javax.persistence.Table;
 
 import dst.ass1.jpa.model.IExpert;
 import dst.ass1.jpa.model.ITaskForce;
+import dst.ass1.jpa.util.Constants;
 
 @Entity
-@Table(name = "expert")
+@Table(name = Constants.T_EXPERT)
 public class Expert extends AbstractPerson implements IExpert {
 	
 	@OneToMany(mappedBy = "expert", targetEntity = TaskForce.class)

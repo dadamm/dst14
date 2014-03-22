@@ -3,6 +3,8 @@ package dst.ass1.jpa.model.impl;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -10,23 +12,23 @@ import javax.persistence.Table;
 
 import dst.ass1.jpa.model.IAddress;
 import dst.ass1.jpa.model.IPerson;
+import dst.ass1.jpa.util.Constants;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "person")
+@Table(name = Constants.T_PERSON)
 public abstract class AbstractPerson implements IPerson {
 	
 	@Id
-	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "lastname")
+	@Column(name = "lastname", length = 50)
 	private String lastName;
 	
-	@Column(name = "firstname")
+	@Column(name = "firstname", length = 50)
 	private String firstName;
 	
-	// TODO is not possible to use interface
 	@Embedded
 	private Address address;
 

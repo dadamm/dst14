@@ -8,13 +8,13 @@ import dst.ass1.jpa.model.IAddress;
 @Embeddable
 public class Address implements IAddress {
 	
-	@Column(name = "street")
+	@Column(name = "street", length = 50)
 	private String street;
 	
-	@Column(name = "city")
+	@Column(name = "city", length = 50)
 	private String city;
 	
-	@Column(name = "zipcode")
+	@Column(name = "zipcode", length = 10)
 	private String zipCode;
 
 	@Override
