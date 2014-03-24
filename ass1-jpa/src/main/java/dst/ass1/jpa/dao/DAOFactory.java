@@ -1,5 +1,15 @@
 package dst.ass1.jpa.dao;
 
+import dst.ass1.jpa.dao.impl.ExpertDao;
+import dst.ass1.jpa.dao.impl.MembershipDao;
+import dst.ass1.jpa.dao.impl.MetadataDao;
+import dst.ass1.jpa.dao.impl.TaskDao;
+import dst.ass1.jpa.dao.impl.TaskForceDao;
+import dst.ass1.jpa.dao.impl.TaskProcessingDao;
+import dst.ass1.jpa.dao.impl.TaskWorkerDao;
+import dst.ass1.jpa.dao.impl.UserDao;
+import dst.ass1.jpa.dao.impl.WorkPlatformDao;
+
 public class DAOFactory {
 
 	private org.hibernate.Session session;
@@ -9,48 +19,39 @@ public class DAOFactory {
 	}
 
 	public IWorkPlatformDAO getPlatformDAO() {
-		// TODO
-		return null;
+		return new WorkPlatformDao(session);
 	}
 
 	public IExpertDAO getExpertDAO() {
-		// TODO
-		return null;
+		return new ExpertDao(session);
 	}
 
 	public ITaskForceDAO getTaskForceDAO() {
-		// TODO
-		return null;
+		return new TaskForceDao(session);
 	}
 
 	public ITaskWorkerDAO getTaskWorkerDAO() {
-		// TODO
-		return null;
+		return new TaskWorkerDao(session);
 	}
 
 	public IMetadataDAO getMetadataDAO() {
-		// TODO
-		return null;
+		return new MetadataDao(session);
 	}
 
 	public ITaskProcessingDAO getTaskProcessingDAO() {
-		// TODO
-		return null;
+		return new TaskProcessingDao(session);
 	}
 
 	public ITaskDAO getTaskDAO() {
-		// TODO
-		return null;
+		return new TaskDao(session);
 	}
 
 	public IMembershipDAO getMembershipDAO() {
-		// TODO
-		return null;
+		return new MembershipDao(session);
 	}
 
 	public IUserDAO getUserDAO() {
-		// TODO
-		return null;
+		return new UserDao(session);
 	}
 
 }
