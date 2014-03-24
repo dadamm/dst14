@@ -3,7 +3,6 @@ package dst.ass1.jpa.dao.impl;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import dst.ass1.jpa.dao.ITaskProcessingDAO;
@@ -20,18 +19,13 @@ public class TaskProcessingDao implements ITaskProcessingDAO {
 
 	@Override
 	public ITaskProcessing findById(Long id) {
-		Transaction transaction = session.beginTransaction();
-		ITaskProcessing taskProcessing = (ITaskProcessing) session.createCriteria(TaskProcessing.class).add(Restrictions.eq("id", id)).uniqueResult();
-		transaction.commit();
-		return taskProcessing;
+		return (ITaskProcessing) session.createCriteria(TaskProcessing.class).add(Restrictions.eq("id", id)).uniqueResult();
 	}
 
 	@Override
 	public List<ITaskProcessing> findAll() {
-		Transaction transaction = session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		List<ITaskProcessing> list = (List<ITaskProcessing>) session.createCriteria(TaskProcessing.class).list();
-		transaction.commit();
 		return list;
 	}
 

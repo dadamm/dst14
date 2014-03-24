@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.hibernate.Transaction;
-
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -23,18 +21,13 @@ public class ExpertDao implements IExpertDAO {
 
 	@Override
 	public IExpert findById(Long id) {
-		Transaction transaction = session.beginTransaction();
-		IExpert expert = (IExpert) session.createCriteria(Expert.class).add(Restrictions.eq("id", id)).uniqueResult();
-		transaction.commit();
-		return expert;
+		return (IExpert) session.createCriteria(Expert.class).add(Restrictions.eq("id", id)).uniqueResult();
 	}
 
 	@Override
 	public List<IExpert> findAll() {
-		Transaction transaction = session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		List<IExpert> list = (List<IExpert>) session.createCriteria(Expert.class).list();
-		transaction.commit();
 		return list;
 	}
 

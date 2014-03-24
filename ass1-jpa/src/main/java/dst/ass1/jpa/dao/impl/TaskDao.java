@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import dst.ass1.jpa.dao.ITaskDAO;
@@ -21,18 +20,13 @@ public class TaskDao implements ITaskDAO {
 
 	@Override
 	public ITask findById(Long id) {
-		Transaction transaction = session.beginTransaction();
-		ITask task = (ITask) session.createCriteria(Task.class).add(Restrictions.eq("id", id)).uniqueResult();
-		transaction.commit();
-		return task;
+		return (ITask) session.createCriteria(Task.class).add(Restrictions.eq("id", id)).uniqueResult();
 	}
 
 	@Override
 	public List<ITask> findAll() {
-		Transaction transaction = session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		List<ITask> list = (List<ITask>) session.createCriteria(Task.class).list();
-		transaction.commit();
 		return list;
 	}
 
