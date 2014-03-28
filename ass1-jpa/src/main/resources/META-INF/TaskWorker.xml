@@ -12,7 +12,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
     			<generated-value strategy="IDENTITY"/>
     		</id>
     		<basic name="name">
-    			<column name="name" length="50"/>
+    			<column name="name" length="50" unique="true"/>
     		</basic>
     		<basic name="workUnitCapacity">
     			<column name="workunitcapacity"/>

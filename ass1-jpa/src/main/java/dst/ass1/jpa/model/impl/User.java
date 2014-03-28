@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import dst.ass1.jpa.model.IMembership;
 import dst.ass1.jpa.model.ITask;
@@ -14,19 +15,19 @@ import dst.ass1.jpa.model.IUser;
 import dst.ass1.jpa.util.Constants;
 
 @Entity
-@Table(name = Constants.T_USER)
+@Table(name = Constants.T_USER, uniqueConstraints = @UniqueConstraint(columnNames = {"accountno", "bankcode"}))
 public class User extends AbstractPerson implements IUser {
 
-	@Column(name = "username", length = 50)
+	@Column(name = "username", length = 50, unique = true, nullable = false)
 	private String username;
 	
 	@Column(name = "password", length = 16)
 	private byte[] password;
 	
-	@Column(name = "accountno", length = 10)
+	@Column(name = "accountno", length = 30)
 	private String accountNo;
 	
-	@Column(name = "bankcode", length = 30)
+	@Column(name = "bankcode", length = 11)
 	private String bankCode;
 	
 	@OneToMany(mappedBy = "user", targetEntity = Task.class)

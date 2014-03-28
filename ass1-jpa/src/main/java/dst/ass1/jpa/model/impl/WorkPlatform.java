@@ -25,7 +25,7 @@ public class WorkPlatform implements IWorkPlatform {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "name", length = 50)
+	@Column(name = "name", length = 50, unique = true)
 	private String name;
 	
 	@Column(name = "loacation", length = 50)
