@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 import dst.ass1.jpa.model.IMetadata;
@@ -28,6 +29,7 @@ public class Metadata implements IMetadata {
 	
 	@ElementCollection
 	@JoinColumn(name = Constants.J_METADATA_SETTINGS)
+	@OrderColumn(name = Constants.M_SETTINGS_ORDER)
 	private List<String> settings;
 
 	@Override
