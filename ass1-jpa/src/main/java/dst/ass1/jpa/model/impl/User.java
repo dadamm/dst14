@@ -1,5 +1,6 @@
 package dst.ass1.jpa.model.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -22,7 +23,7 @@ public class User extends AbstractPerson implements IUser {
 	@Column(name = "password", length = 16)
 	private byte[] password;
 	
-	@Column(name = "accountno", length = 6)
+	@Column(name = "accountno", length = 10)
 	private String accountNo;
 	
 	@Column(name = "bankcode", length = 30)
@@ -76,7 +77,11 @@ public class User extends AbstractPerson implements IUser {
 
 	@Override
 	public List<ITask> getTasks() {
-		return this.tasks;
+		if (tasks == null) {
+			return this.tasks = new LinkedList<ITask>();
+		} else {
+			return this.tasks;
+		}
 	}
 
 	@Override
@@ -86,17 +91,21 @@ public class User extends AbstractPerson implements IUser {
 
 	@Override
 	public void addTask(ITask task) {
-		this.tasks.add(task);
+		getTasks().add(task);
 	}
 
 	@Override
 	public void addMembership(IMembership membership) {
-		this.memberships.add(membership);
+		getMemberships().add(membership);
 	}
 
 	@Override
 	public List<IMembership> getMemberships() {
-		return this.memberships;
+		if (memberships == null) {
+			return this.memberships = new LinkedList<IMembership>();
+		} else {
+			return this.memberships;
+		}
 	}
 
 	@Override

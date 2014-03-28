@@ -1,6 +1,7 @@
 package dst.ass1.jpa.model.impl;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import dst.ass1.jpa.model.ITaskForce;
@@ -91,7 +92,11 @@ public class TaskWorker implements ITaskWorker {
 
 	@Override
 	public List<ITaskProcessing> getTaskProcessings() {
-		return this.taskProcessings;
+		if (taskProcessings == null) {
+			return this.taskProcessings = new LinkedList<ITaskProcessing>();
+		} else {
+			return this.taskProcessings;
+		}
 	}
 
 	@Override
@@ -101,7 +106,7 @@ public class TaskWorker implements ITaskWorker {
 
 	@Override
 	public void addTaskProcessing(ITaskProcessing processing) {
-		this.taskProcessings.add(processing);
+		getTaskProcessings().add(processing);
 	}
 
 }

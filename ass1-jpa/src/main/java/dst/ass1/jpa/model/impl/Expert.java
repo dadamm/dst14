@@ -1,5 +1,6 @@
 package dst.ass1.jpa.model.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -19,7 +20,11 @@ public class Expert extends AbstractPerson implements IExpert {
 
 	@Override
 	public List<ITaskForce> getAdvisedTaskForces() {
-		return this.advisedTaskForces;
+		if (advisedTaskForces == null) {
+			return this.advisedTaskForces = new LinkedList<ITaskForce>();
+		} else {
+			return this.advisedTaskForces;
+		}
 	}
 
 	@Override
@@ -29,7 +34,7 @@ public class Expert extends AbstractPerson implements IExpert {
 
 	@Override
 	public void addAdvisedTaskForce(ITaskForce taskForce) {
-		this.advisedTaskForces.add(taskForce);
+		getAdvisedTaskForces().add(taskForce);
 	}
 
 }

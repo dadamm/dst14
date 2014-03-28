@@ -1,6 +1,7 @@
 package dst.ass1.jpa.model.impl;
 
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -81,12 +82,16 @@ public class WorkPlatform implements IWorkPlatform {
 
 	@Override
 	public void addMembership(IMembership membership) {
-		this.memberships.add(membership);
+		getMemberships().add(membership);
 	}
 
 	@Override
 	public List<IMembership> getMemberships() {
-		return this.memberships;
+		if (memberships == null) {
+			return this.memberships = new LinkedList<IMembership>();
+		} else {
+			return this.memberships;
+		}
 	}
 
 	@Override
@@ -96,7 +101,11 @@ public class WorkPlatform implements IWorkPlatform {
 
 	@Override
 	public List<ITaskForce> getTaskForces() {
-		return this.taskForces;
+		if (taskForces == null) {
+			return this.taskForces = new LinkedList<ITaskForce>();
+		} else {
+			return this.taskForces;
+		}
 	}
 
 	@Override
@@ -106,7 +115,7 @@ public class WorkPlatform implements IWorkPlatform {
 
 	@Override
 	public void addTaskForce(ITaskForce taskForce) {
-		this.taskForces.add(taskForce);
+		getTaskForces().add(taskForce);
 	}
 
 }

@@ -6,6 +6,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Transient;
 
 import dst.ass1.jpa.model.IMembershipKey;
+import dst.ass1.jpa.model.IPerson;
 import dst.ass1.jpa.model.IUser;
 import dst.ass1.jpa.model.IWorkPlatform;
 
@@ -26,7 +27,8 @@ public class MembershipKey implements IMembershipKey, Serializable {
 
 	@Override
 	public void setUser(IUser user) {
-		this.setUser(user);
+		this.user = user;
+		this.userId = ((IPerson) user).getId();
 	}
 
 	@Override
@@ -36,7 +38,8 @@ public class MembershipKey implements IMembershipKey, Serializable {
 
 	@Override
 	public void setWorkPlatform(IWorkPlatform platform) {
-		this.setWorkPlatform(platform);
+		this.workPlatform = platform;
+		this.workPlatformId = platform.getId();
 	}
 
 	@Override
@@ -50,23 +53,22 @@ public class MembershipKey implements IMembershipKey, Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		
 		MembershipKey other = (MembershipKey) obj;
 		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
+			if (other.userId != null) return false;
+		} else if (!userId.equals(other.userId)) {
 			return false;
+		}
+		
 		if (workPlatformId == null) {
-			if (other.workPlatformId != null)
-				return false;
-		} else if (!workPlatformId.equals(other.workPlatformId))
+			if (other.workPlatformId != null) return false;
+		} else if (!workPlatformId.equals(other.workPlatformId)) {
 			return false;
+		}
 		return true;
 	}
 

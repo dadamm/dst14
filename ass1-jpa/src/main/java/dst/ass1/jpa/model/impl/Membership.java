@@ -5,9 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import dst.ass1.jpa.model.IMembership;
@@ -29,14 +28,12 @@ public class Membership implements IMembership {
 	@Column(name = "discount")
 	private Double discount;
 	
-	@MapsId("userId")
+	@PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "userId")
 	@ManyToOne(targetEntity = User.class)
-	@JoinColumn(name = "user_id")
 	private IUser user;
 
-	@MapsId("workPlatformId")
+	@PrimaryKeyJoinColumn(name = "workplatform_id",referencedColumnName = "workPlatform")
 	@ManyToOne(targetEntity = WorkPlatform.class)
-	@JoinColumn(name = "workplatform_id")
 	private IWorkPlatform workPlatform;
 
 	@Override

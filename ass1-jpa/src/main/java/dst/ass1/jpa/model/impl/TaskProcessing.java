@@ -1,6 +1,7 @@
 package dst.ass1.jpa.model.impl;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -93,7 +94,11 @@ public class TaskProcessing implements ITaskProcessing {
 
 	@Override
 	public List<ITaskWorker> getTaskWorkers() {
-		return this.taskWorkers;
+		if (taskWorkers == null) {
+			return this.taskWorkers = new LinkedList<ITaskWorker>();
+		} else {
+			return this.taskWorkers;
+		}
 	}
 
 	@Override
@@ -103,7 +108,7 @@ public class TaskProcessing implements ITaskProcessing {
 
 	@Override
 	public void addWorker(ITaskWorker worker) {
-		this.taskWorkers.add(worker);
+		getTaskWorkers().add(worker);
 	}
 
 	@Override

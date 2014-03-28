@@ -1,5 +1,6 @@
 package dst.ass1.jpa.model.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -51,7 +52,11 @@ public class Metadata implements IMetadata {
 
 	@Override
 	public List<String> getSettings() {
-		return this.settings;
+		if (settings == null) {
+			return this.settings = new LinkedList<String>();
+		} else {
+			return this.settings;
+		}
 	}
 
 	@Override
@@ -61,7 +66,7 @@ public class Metadata implements IMetadata {
 
 	@Override
 	public void addSetting(String setting) {
-		this.settings.add(setting);
+		getSettings().add(setting);
 	}
 
 }

@@ -1,6 +1,7 @@
 package dst.ass1.jpa.model.impl;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -100,7 +101,11 @@ public class TaskForce implements ITaskForce {
 
 	@Override
 	public List<ITaskForce> getComposedOf() {
-		return this.composedOf;
+		if (composedOf == null) {
+			return this.composedOf = new LinkedList<ITaskForce>();
+		} else {
+			return this.composedOf;
+		}
 	}
 
 	@Override
@@ -110,12 +115,16 @@ public class TaskForce implements ITaskForce {
 
 	@Override
 	public void addComposedOf(ITaskForce o) {
-		this.composedOf.add(o);
+		getComposedOf().add(o);
 	}
 
 	@Override
 	public List<ITaskForce> getPartOf() {
-		return this.partOf;
+		if (partOf == null) {
+			return this.partOf = new LinkedList<ITaskForce>();
+		} else {
+			return this.partOf;
+		}
 	}
 
 	@Override
@@ -125,12 +134,16 @@ public class TaskForce implements ITaskForce {
 
 	@Override
 	public void addPartOf(ITaskForce o) {
-		this.partOf.add(o);
+		getPartOf().add(o);
 	}
 
 	@Override
 	public List<ITaskWorker> getTaskWorkers() {
-		return this.taskWorkers;
+		if (taskWorkers == null) {
+			return this.taskWorkers = new LinkedList<ITaskWorker>();
+		} else {
+			return this.taskWorkers;
+		}
 	}
 
 	@Override
@@ -140,7 +153,7 @@ public class TaskForce implements ITaskForce {
 
 	@Override
 	public void addTaskWorker(ITaskWorker worker) {
-		this.taskWorkers.add(worker);
+		getTaskWorkers().add(worker);
 	}
 
 	@Override
