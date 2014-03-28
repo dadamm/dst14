@@ -39,7 +39,7 @@ public class TaskProcessing implements ITaskProcessing {
 	private Date end;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "taskstatus", length = 10)
+	@Column(name = "status", length = 10)
 	private TaskStatus taskStatus;
 	
 	@ManyToMany(targetEntity = TaskWorker.class)
