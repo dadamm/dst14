@@ -31,8 +31,8 @@ public class Task implements ITask {
 	@Column(name = "processingtime")
 	private Integer processingTime;
 	
-	@Column(name = "paid")
-	private boolean paid;
+	@Column(name = "ispaid")
+	private boolean isPaid;
 	
 	@OneToOne(targetEntity = Metadata.class, optional = false)
 	@JoinColumn(name = "metadata_id")
@@ -79,12 +79,12 @@ public class Task implements ITask {
 
 	@Override
 	public boolean isPaid() {
-		return this.paid;
+		return this.isPaid;
 	}
 
 	@Override
 	public void setPaid(boolean isPaid) {
-		this.paid = isPaid;
+		this.isPaid = isPaid;
 	}
 
 	@Override
