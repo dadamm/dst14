@@ -40,9 +40,9 @@ public class TaskForce implements ITaskForce {
 	private Date nextMeeting;
 	
 	@ManyToMany(targetEntity = TaskForce.class)
-	@JoinTable(name = "taskforce_composer_partof",
-		joinColumns = @JoinColumn(name = "composertaskforce_id", referencedColumnName = "id"),
-		inverseJoinColumns = @JoinColumn(name = "partoftaskforce_id", referencedColumnName = "id"))
+	@JoinTable(name = "composed_of",
+		joinColumns = @JoinColumn(name = "composedof_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name = "partof_id", referencedColumnName = "id"))
 	private List<ITaskForce> composedOf;
 	
 	@ManyToMany(mappedBy = "composedOf", targetEntity = TaskForce.class)
