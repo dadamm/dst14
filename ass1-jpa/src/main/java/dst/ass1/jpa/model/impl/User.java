@@ -9,6 +9,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Index;
+
 import dst.ass1.jpa.model.IMembership;
 import dst.ass1.jpa.model.ITask;
 import dst.ass1.jpa.model.IUser;
@@ -22,6 +24,7 @@ public class User extends AbstractPerson implements IUser {
 	private String username;
 	
 	@Column(name = "password", length = 16)
+	@Index(name = "password")
 	private byte[] password;
 	
 	@Column(name = "accountno", length = 30)
