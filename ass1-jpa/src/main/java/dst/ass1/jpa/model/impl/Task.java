@@ -34,7 +34,7 @@ public class Task implements ITask {
 	@Column(name = "paid")
 	private boolean paid;
 	
-	@ManyToOne(targetEntity = Metadata.class)
+	@OneToOne(targetEntity = Metadata.class, optional = false)
 	@JoinColumn(name = "metadata_id")
 	private IMetadata metadata;
 	
