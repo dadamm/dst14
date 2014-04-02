@@ -20,7 +20,6 @@ public class SQLInterceptor extends EmptyInterceptor {
 	public static void resetCounter() {
 		selectCount = 0;
 	}
-
 	
 	public static int getSelectCount() {
 		return selectCount;
