@@ -39,7 +39,7 @@ public class TaskProcessing implements ITaskProcessing {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status", length = 10)
-	private TaskStatus taskStatus;
+	private TaskStatus status;
 	
 	@ManyToMany(targetEntity = TaskWorker.class)
 	@JoinTable(name = Constants.J_PROCESSING_TASKWORKER,
@@ -82,12 +82,12 @@ public class TaskProcessing implements ITaskProcessing {
 
 	@Override
 	public TaskStatus getStatus() {
-		return this.taskStatus;
+		return this.status;
 	}
 
 	@Override
 	public void setStatus(TaskStatus status) {
-		this.taskStatus = status;
+		this.status = status;
 	}
 
 	@Override

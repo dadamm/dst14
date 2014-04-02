@@ -1,5 +1,6 @@
 package dst.ass1.jpa.model.impl;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,6 +17,10 @@ import dst.ass1.jpa.model.ITask;
 import dst.ass1.jpa.model.ITaskProcessing;
 import dst.ass1.jpa.model.IUser;
 import dst.ass1.jpa.util.Constants;
+
+@NamedQuery(
+		name = "allFinishedTasks",
+		query = "select t from Task t where t.taskProcessing.status =  dst.ass1.jpa.model.TaskStatus.FINISHED")
 
 @Entity
 @Table(name = Constants.T_TASK)
@@ -42,8 +47,7 @@ public class Task implements ITask {
 	@JoinColumn(name = "user_id")
 	private IUser user;
 	
-	@MapsId
-	@OneToOne(targetEntity = TaskProcessing.class)
+	@OneToOne(targetEntity = TaskProcessing.class, optional = false, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	@JoinColumn(name = "taskprocessing_id")
 	private ITaskProcessing taskProcessing;
 

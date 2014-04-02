@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -15,6 +17,14 @@ import dst.ass1.jpa.model.IMembership;
 import dst.ass1.jpa.model.ITask;
 import dst.ass1.jpa.model.IUser;
 import dst.ass1.jpa.util.Constants;
+
+@NamedQueries({
+@NamedQuery(name = "usersWithActiveMembership",
+            query = "select u from User u join u.memberships m join u.tasks t join m.workPlatform w "
+            		+ "where w.name = :name group by u having count(t) >= :minNr"),
+@NamedQuery(name = "mostActiveUser",
+			query = "select u FROM User u JOIN u.tasks t group by u having count(t) = (select max(x.tasks.size) from User x)")
+})
 
 @Entity
 @Table(name = Constants.T_USER, uniqueConstraints = @UniqueConstraint(columnNames = {"accountno", "bankcode"}))
