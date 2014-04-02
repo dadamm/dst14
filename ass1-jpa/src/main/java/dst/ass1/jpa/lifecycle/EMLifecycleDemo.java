@@ -4,6 +4,8 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.persistence.EntityManager;
 
+import dst.ass1.jpa.model.ITask;
+import dst.ass1.jpa.model.IUser;
 import dst.ass1.jpa.model.ModelFactory;
 
 public class EMLifecycleDemo {
@@ -24,8 +26,20 @@ public class EMLifecycleDemo {
 	 */
 	public void demonstrateEntityMangerLifecycle()
 			throws NoSuchAlgorithmException {
-
-		// TODO
+		
+		// create objects to persist
+		ITask task = modelFactory.createTask();
+		
+		IUser user = modelFactory.createUser();
+		user.setUsername("username1");
+		
+		task.setUser(user);
+		
+		// EntityManager persist objects to database
+		em.persist(task);
+		
+		// EntityManager remove objects from database
+		em.remove(task);
 	}
 
 }
