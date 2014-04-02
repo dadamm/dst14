@@ -16,7 +16,6 @@ public class WorkUnitCapicityValidator implements ConstraintValidator<WorkUnitCa
 
 	@Override
 	public boolean isValid(Integer value, ConstraintValidatorContext context) {
-		// TODO add message
 		return (value >= min && value <= max);
 	}
 
