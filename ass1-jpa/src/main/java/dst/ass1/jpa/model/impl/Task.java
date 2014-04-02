@@ -47,7 +47,7 @@ public class Task implements ITask {
 	@JoinColumn(name = "user_id")
 	private IUser user;
 	
-	@OneToOne(targetEntity = TaskProcessing.class, optional = false, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+	@OneToOne(targetEntity = TaskProcessing.class, optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "taskprocessing_id")
 	private ITaskProcessing taskProcessing;
 
