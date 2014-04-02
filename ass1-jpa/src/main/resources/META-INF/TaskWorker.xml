@@ -12,13 +12,13 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
     			<generated-value strategy="IDENTITY"/>
     		</id>
     		<basic name="name">
-    			<column name="name" length="50" unique="true"/>
+    			<column name="name" length="25" unique="true"/>
     		</basic>
     		<basic name="workUnitCapacity">
     			<column name="workunitcapacity"/>
     		</basic>
     		<basic name="location">
-    			<column name="location" length="50"/>
+    			<column name="location" length="12"/>
     		</basic>
     		<basic name="joinedDate">
     			<column name="joineddate"/>

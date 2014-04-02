@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import dst.ass1.jpa.model.ITaskForce;
 import dst.ass1.jpa.model.ITaskProcessing;
 import dst.ass1.jpa.model.ITaskWorker;
@@ -11,10 +15,18 @@ import dst.ass1.jpa.model.ITaskWorker;
 public class TaskWorker implements ITaskWorker {
 	
 	private Long id;
+	
+	@Size(min = 5, max = 25)
 	private String name;
 	private Integer workUnitCapacity;
+	
+	@Pattern(regexp = "[A-Z]{3}-[A-Z]{3}@[0-9]{4}")
 	private String location;
+	
+	@Past
 	private Date joinedDate;
+	
+	@Past
 	private Date lastTraining;
 	
 	private ITaskForce taskForce;
