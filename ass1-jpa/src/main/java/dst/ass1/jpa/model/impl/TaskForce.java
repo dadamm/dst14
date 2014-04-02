@@ -41,8 +41,8 @@ public class TaskForce implements ITaskForce {
 	
 	@ManyToMany(targetEntity = TaskForce.class)
 	@JoinTable(name = "composed_of",
-		joinColumns = @JoinColumn(name = "composedof_id", referencedColumnName = "id"),
-		inverseJoinColumns = @JoinColumn(name = "partof_id", referencedColumnName = "id"))
+		joinColumns = @JoinColumn(name = "partof_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name = "composedof_id", referencedColumnName = "id"))
 	private List<ITaskForce> composedOf;
 	
 	@ManyToMany(mappedBy = "composedOf", targetEntity = TaskForce.class)
