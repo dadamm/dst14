@@ -18,7 +18,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
     			<column name="workunitcapacity"/>
     		</basic>
     		<basic name="location">
-    			<column name="location" length="12"/>
+    			<column name="location" length="20"/>
     		</basic>
     		<basic name="joinedDate">
     			<column name="joineddate"/>

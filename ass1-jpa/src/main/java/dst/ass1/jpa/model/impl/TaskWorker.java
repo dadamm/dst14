@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 import dst.ass1.jpa.model.ITaskForce;
 import dst.ass1.jpa.model.ITaskProcessing;
 import dst.ass1.jpa.model.ITaskWorker;
+import dst.ass1.jpa.validator.WorkUnitCapacity;
 
 public class TaskWorker implements ITaskWorker {
 	
@@ -18,6 +19,8 @@ public class TaskWorker implements ITaskWorker {
 	
 	@Size(min = 5, max = 25)
 	private String name;
+	
+	@WorkUnitCapacity(min = 4, max = 8)
 	private Integer workUnitCapacity;
 	
 	@Pattern(regexp = "[A-Z]{3}-[A-Z]{3}@[0-9]{4}")
