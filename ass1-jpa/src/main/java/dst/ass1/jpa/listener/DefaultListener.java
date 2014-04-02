@@ -1,7 +1,5 @@
 package dst.ass1.jpa.listener;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class DefaultListener {
 	
@@ -11,8 +9,8 @@ public class DefaultListener {
 	private static int persistOperations;
 	private static long overallTimeToPersist;
 	
-	private Map<Integer, Long> startTimes = new HashMap<Integer, Long>();
-
+	private static long startTime;
+	
 	public static int getLoadOperations() {
 		return loadOperations;
 	}
@@ -43,17 +41,15 @@ public class DefaultListener {
 		removeOperations = 0;
 		persistOperations = 0;
 		overallTimeToPersist = 0;
+		startTime = 0;
 	}
 	
-	// TODO add persist time information
 	public synchronized void onPrePersist(Object object) {
-//		startTimes.put(object.hashCode(), System.currentTimeMillis());
+		startTime = System.currentTimeMillis();
 	}
 	
-	// TODO add persist time information
 	public synchronized void onPostPersist(Object object) {
-//		overallTimeToPersist += System.currentTimeMillis() - startTimes.get(object.hashCode());
-		startTimes.remove(object.hashCode());
+		overallTimeToPersist += System.currentTimeMillis() - startTime;
 		persistOperations++;
 	}
 	
