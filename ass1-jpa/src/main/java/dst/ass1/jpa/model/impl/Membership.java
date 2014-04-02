@@ -3,11 +3,12 @@ package dst.ass1.jpa.model.impl;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import dst.ass1.jpa.model.IMembership;
 import dst.ass1.jpa.model.IMembershipKey;
@@ -17,9 +18,18 @@ import dst.ass1.jpa.util.Constants;
 
 @Entity
 @Table(name = Constants.T_MEMBERSHIP)
+@IdClass(MembershipKey.class)
 public class Membership implements IMembership {
 	
-	@EmbeddedId
+	@Id
+	@ManyToOne(targetEntity = User.class, optional = false)
+	private IUser user;
+	
+	@Id
+	@ManyToOne(targetEntity = WorkPlatform.class, optional = false)
+	private IWorkPlatform workPlatform;
+	
+	@Transient
 	private MembershipKey id;
 	
 	@Column(name = "registration")
@@ -28,13 +38,6 @@ public class Membership implements IMembership {
 	@Column(name = "discount")
 	private Double discount;
 	
-	@PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "userId")
-	@ManyToOne(targetEntity = User.class)
-	private IUser user;
-
-	@PrimaryKeyJoinColumn(name = "workplatform_id",referencedColumnName = "workPlatform")
-	@ManyToOne(targetEntity = WorkPlatform.class)
-	private IWorkPlatform workPlatform;
 
 	@Override
 	public IMembershipKey getId() {
@@ -45,6 +48,8 @@ public class Membership implements IMembership {
 	public void setId(IMembershipKey id) {
 		if(id instanceof MembershipKey) {
 			this.id = (MembershipKey) id;
+			this.user = id.getUser();
+			this.workPlatform = id.getWorkPlatform();
 		} else throw new IllegalArgumentException("The argument is not a type of MembershipKey");
 	}
 
