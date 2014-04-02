@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import dst.ass1.jpa.dao.IExpertDAO;
 import dst.ass1.jpa.model.IExpert;
+import dst.ass1.jpa.model.ITaskForce;
 import dst.ass1.jpa.model.impl.Expert;
 
 public class ExpertDao implements IExpertDAO {
@@ -39,8 +40,19 @@ public class ExpertDao implements IExpertDAO {
 
 	@Override
 	public HashMap<IExpert, Date> findNextTaskForceMeetingOfExperts() {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<IExpert, Date> expertMap = new HashMap<IExpert, Date>();
+		@SuppressWarnings("unchecked")
+		List<IExpert> experts = session.getNamedQuery("taskforcesOfExpert").list();
+		for(IExpert expert : experts) {
+			Date smallestDate = null;
+			for(ITaskForce taskForce : expert.getAdvisedTaskForces()) {
+				if (smallestDate == null || smallestDate.after(taskForce.getNextMeeting())) {
+					smallestDate = taskForce.getNextMeeting();
+				}
+			}
+			expertMap.put(expert, smallestDate);
+		}
+		return expertMap;
 	}
 
 }

@@ -4,12 +4,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import dst.ass1.jpa.model.IExpert;
 import dst.ass1.jpa.model.ITaskForce;
 import dst.ass1.jpa.util.Constants;
+
+@NamedQuery(
+		name = "taskforcesOfExpert",
+		query = "select e from Expert e where firstname like 'Alex%'"
+)
 
 @Entity
 @Table(name = Constants.T_EXPERT)
