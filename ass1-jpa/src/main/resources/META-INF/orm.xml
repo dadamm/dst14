@@ -3,5 +3,17 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
     http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
-    <package>dst.ass1.jpa.model.impl</package>
+	<persistence-unit-metadata>
+        <persistence-unit-defaults>
+            <entity-listeners>
+                <entity-listener class="dst.ass1.jpa.listener.DefaultListener">
+                    <pre-persist method-name="onPrePersist"/>
+                    <post-persist method-name="onPostPersist"/>
+                    <post-remove method-name="onPostRemove"/>
+                    <post-update method-name="onPostUpdate"/>
+                    <post-load method-name="onPostLoad"/>
+                </entity-listener>
+            </entity-listeners>
+        </persistence-unit-defaults>
+    </persistence-unit-metadata>
 </entity-mappings>
