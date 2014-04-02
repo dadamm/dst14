@@ -4,15 +4,18 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.EntityListeners;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import dst.ass1.jpa.listener.WorkerListener;
 import dst.ass1.jpa.model.ITaskForce;
 import dst.ass1.jpa.model.ITaskProcessing;
 import dst.ass1.jpa.model.ITaskWorker;
 import dst.ass1.jpa.validator.WorkUnitCapacity;
 
+@EntityListeners(WorkerListener.class)
 public class TaskWorker implements ITaskWorker {
 	
 	private Long id;
