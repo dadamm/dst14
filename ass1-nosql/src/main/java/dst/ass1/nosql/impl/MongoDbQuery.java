@@ -35,7 +35,7 @@ public class MongoDbQuery implements IMongoDbQuery {
 
 	@Override
 	public List<Long> findLastUpdatedGt(Long time) {
-		
+		// TODO Auto-generated method stub
 		return null;
 	}
 
