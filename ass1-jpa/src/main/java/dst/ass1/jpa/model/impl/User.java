@@ -22,6 +22,9 @@ import dst.ass1.jpa.util.Constants;
 @NamedQuery(name = "usersWithActiveMembership",
             query = "select u from User u join u.memberships m join u.tasks t join m.workPlatform w "
             		+ "where w.name = :name group by u having count(t) >= :minNr"),
+//@NamedQuery(name = "usersWithActiveMembership",
+//      		query = "select u from User u join u.memberships m join m.workPlatform w join w.taskForces f join f.taskWorkers tw join tw.taskProcessings p join p.task t "
+//      				+ "where w.name = :name group by u having count(t) >= :minNr"),
 @NamedQuery(name = "mostActiveUser",
 			query = "select u from User u join u.tasks t group by u having count(t) = (select max(x.tasks.size) from User x)")
 })
