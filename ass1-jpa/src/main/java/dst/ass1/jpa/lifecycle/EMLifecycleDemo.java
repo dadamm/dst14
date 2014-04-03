@@ -27,7 +27,11 @@ public class EMLifecycleDemo {
 	public void demonstrateEntityMangerLifecycle()
 			throws NoSuchAlgorithmException {
 		
-		// create objects to persist
+		/*
+		 * State: NEW
+		 * The entities we want to persist are initialized, but not associated
+		 * with the EntityManager and has no reference to the database.
+		 */
 		ITask task = modelFactory.createTask();
 		
 		IUser user = modelFactory.createUser();
@@ -35,11 +39,29 @@ public class EMLifecycleDemo {
 		
 		task.setUser(user);
 		
-		// EntityManager persist objects to database
+		/*
+		 * Status: MANAGED
+		 * After persisting entity, it becomes managed. The Entity will be stored
+		 * into the database.
+		 * When properties in the database are changed the EntityManager updates the
+		 * values in the database.
+		 */
 		em.persist(task);
 		
-		// EntityManager remove objects from database
+		/* 
+		 * Status: REMOVED
+		 * The persisted entity will be marked as removed. At the next commit
+		 * it will be removed physically.
+		 */
 		em.remove(task);
+		
+		/*
+		 * Status: DETACHED
+		 * The entity become this status, when it has been disconnected from the EntityManager.
+		 * It has no persistence context.
+		 * All entities become detached, when the EntityManager is closed.
+		 */
+		em.detach(task);
 	}
 
 }
