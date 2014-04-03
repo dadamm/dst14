@@ -36,15 +36,15 @@
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-				       <artifactId>maven-jar-plugin</artifactId>
-				       <version>2.2</version>
-				       <executions>
-				         <execution>
-				           <goals>
-				             <goal>test-jar</goal>
-				           </goals>
-				         </execution>
-				       </executions>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.2</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>test-jar</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -62,6 +62,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version><!--$NO-MVN-MAN-VER$ -->
+			<!-- <scope>test</scope> -->
 		</dependency>
 	</dependencies>
 
@@ -219,6 +220,9 @@
 			<modules>
 				<module>ass1-jpa</module>
 				<module>ass1-nosql</module>
+				<module>ass2-di</module>
+				<module>ass2-ejb</module>
+				<module>ass2-ws</module>
 			</modules>
 		</profile>
 
@@ -233,6 +237,138 @@
 			<modules>
 				<module>ass1-nosql</module>
 			</modules>
+		</profile>
+
+		<profile>
+			<id>ass2-di</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<exclude>dst/ass2/di/**/*Transparent*.java</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<modules>
+				<module>ass2-di</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>ass2-di-agent</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-jar-plugin</artifactId>
+						<configuration>
+							<archive>
+								<manifestEntries>
+									<Premain-Class>dst.ass2.di.agent.InjectorAgent</Premain-Class>
+								</manifestEntries>
+							</archive>
+							<finalName>dst-di-agent</finalName>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<phase>test-compile</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<argLine>-javaagent:"${project.build.directory}/dst-di-agent.jar"</argLine>
+							<includes>
+								<include>dst/ass2/di/**/*Transparent*.java</include>
+							</includes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<modules>
+				<module>ass2-di</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>ass2-deploy</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<skipTests>true</skipTests>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<modules>
+				<module>ass1-jpa</module>
+				<module>ass2-ejb</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>ass2-ejb</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<includes>
+								<include>dst/ass2/ejb/**</include>
+							</includes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<modules>
+				<module>ass1-jpa</module>
+				<module>ass2-ejb</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>ass2-ws</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<includes>
+								<include>dst/ass2/ws/**</include>
+							</includes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<modules>
+				<module>ass1-jpa</module>
+				<module>ass2-ejb</module>
+				<module>ass2-ws</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>default-tools.jar</id>
+			<activation>
+				<property>
+					<name>java.vendor</name>
+					<value>Oracle Corporation</value>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.sun</groupId>
+					<artifactId>tools</artifactId>
+					<version>1.6.0</version>
+					<scope>system</scope>
+					<systemPath>${java.home}/../lib/tools.jar</systemPath>
+				</dependency>
+			</dependencies>
 		</profile>
 
 	</profiles>
@@ -255,6 +391,10 @@
 			<name>maven mongodb plugin repository</name>
 			<url>http://maven-mongodb-plugin.googlecode.com/svn/maven/repo</url>
 			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>eclipselink</id>
+			<url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
 		</repository>
 	</repositories>
 
