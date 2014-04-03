@@ -33,7 +33,7 @@ public class User extends AbstractPerson implements IUser {
 	@Column(name = "username", length = 50, unique = true, nullable = false)
 	private String username;
 	
-	@Column(name = "password", length = 16)
+	@Column(columnDefinition = "BINARY(16)")
 	@Index(name = "password")
 	private byte[] password;
 	
