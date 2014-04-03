@@ -31,17 +31,16 @@ public class MongoDbDataLoader implements IMongoDbDataLoader {
 		sb.append("{");
 		sb.append("\"task_id\" : ");
 		sb.append(taskid);
-		sb.append(", ");
+		sb.append(" , ");
 		sb.append("\"last_updated\" : ");
 		sb.append(lastUpdated);
-		sb.append(", ");
-		sb.append("\"result_matrix\" : ");
-		sb.append(testData.getStringData(taskid.intValue()));
-		sb.append(", ");
-		sb.append("\"type\" : ");
-		sb.append("\"");
+		sb.append(" , ");
 		sb.append(testData.getDataDesc(taskid.intValue()));
-		sb.append("\"");
+		sb.append(" : ");
+		sb.append(testData.getStringData(taskid.intValue()));
+		sb.append(" , ");
+		sb.append("\"type\" : ");
+		sb.append("\"identity_matrix\"");
 		sb.append("}");
 		return sb.toString();
 	}
@@ -50,13 +49,13 @@ public class MongoDbDataLoader implements IMongoDbDataLoader {
 	public void loadData() throws Exception {
 		
 		@SuppressWarnings("unchecked")
-		List<Task> tasks = em.createNamedQuery("allFinishedTasks").getResultList();
+		List<Task> tasks = em.createNamedQuery(Constants.Q_ALLFINISHEDTASKS).getResultList();
 		
 		Mongo mongo = new Mongo();
 		DB db = mongo.getDB("dst");
 		DBCollection collection = db.getCollection(Constants.COLL_TASKRESULT);
 		
-		collection.createIndex(new BasicDBObject("task_id", 1));
+		collection.createIndex(new BasicDBObject(Constants.I_TASK, 1));
 		
 		for(Task task : tasks) {
 			String jsonString = createJsonString(task.getId(), task.getTaskProcessing().getEnd().getTime());
