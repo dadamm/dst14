@@ -28,7 +28,7 @@ import dst.ass1.jpa.util.Constants;
 public class TaskProcessing implements ITaskProcessing {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@Column(name = "start")

@@ -27,7 +27,7 @@ import dst.ass1.jpa.util.Constants;
 public class TaskForce implements ITaskForce {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@Column(name = "name", length = 50, unique = true)
