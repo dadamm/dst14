@@ -18,10 +18,10 @@ import dst.ass1.jpa.model.ITaskProcessing;
 import dst.ass1.jpa.model.IUser;
 import dst.ass1.jpa.util.Constants;
 
-@NamedQuery(
-		name = "allFinishedTasks",
-		query = "select t from Task t where t.taskProcessing.status =  dst.ass1.jpa.model.TaskStatus.FINISHED"
-)
+//@NamedQuery(
+//		name = "allFinishedTasks",
+//		query = "select t from Task t where t.taskProcessing.status =  dst.ass1.jpa.model.TaskStatus.FINISHED"
+//)
 
 @Entity
 @Table(name = Constants.T_TASK)

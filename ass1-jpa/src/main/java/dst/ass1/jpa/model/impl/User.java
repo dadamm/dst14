@@ -18,16 +18,19 @@ import dst.ass1.jpa.model.ITask;
 import dst.ass1.jpa.model.IUser;
 import dst.ass1.jpa.util.Constants;
 
-@NamedQueries({
-@NamedQuery(name = "usersWithActiveMembership",
-            query = "select u from User u join u.memberships m join u.tasks t join m.workPlatform w "
-            		+ "where w.name = :name group by u having count(t) >= :minNr"),
+//@NamedQueries({
+//@NamedQuery(name = "usersWithActiveMembership",
+//            query = "select u from User u join u.memberships m join u.tasks t join m.workPlatform w "
+//            		+ "where w.name = :name group by u having count(t) >= :minNr"),
+//@NamedQuery(name = "mostActiveUser",
+//			query = "select u from User u join u.tasks t group by u having count(t) = (select max(x.tasks.size) from User x)")
+
+// defect
 //@NamedQuery(name = "usersWithActiveMembership",
 //      		query = "select u from User u join u.memberships m join m.workPlatform w join w.taskForces f join f.taskWorkers tw join tw.taskProcessings p join p.task t "
 //      				+ "where w.name = :name group by u having count(t) >= :minNr"),
-@NamedQuery(name = "mostActiveUser",
-			query = "select u from User u join u.tasks t group by u having count(t) = (select max(x.tasks.size) from User x)")
-})
+
+//})
 
 @Entity
 @Table(name = Constants.T_USER, uniqueConstraints = @UniqueConstraint(columnNames = {"accountno", "bankcode"}))
