@@ -7,6 +7,7 @@ import dst.ass2.ejb.ws.IGetStatsResponse;
 
 public class TaskStatisticsBean implements ITaskStatisticsBean {
 
+	@Override
 	public IGetStatsResponse getStatisticsForPlatform(
 			IGetStatsRequest request, 
 			String name) throws WebServiceException {

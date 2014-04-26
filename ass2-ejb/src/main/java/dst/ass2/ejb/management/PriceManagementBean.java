@@ -62,7 +62,6 @@ public class PriceManagementBean implements IPriceManagementBean {
 		}
 	}
 	
-	
 	@Override
 	public void clearCache() {
 		priceMap.clear();

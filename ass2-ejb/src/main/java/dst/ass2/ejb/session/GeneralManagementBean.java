@@ -31,7 +31,6 @@ public class GeneralManagementBean implements IGeneralManagementBean {
 		priceManagementBean.setPrice(nrOfHistoricalTasks, price);
 	}
 
-
 	@Override
 	public Future<BillDTO> getBillForUser(String username) throws Exception {
 		// TODO
