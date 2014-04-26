@@ -4,18 +4,31 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.Future;
 
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import dst.ass2.ejb.dto.AuditLogDTO;
 import dst.ass2.ejb.dto.BillDTO;
-
+import dst.ass2.ejb.management.PriceManagementBean;
+import dst.ass2.ejb.management.interfaces.IPriceManagementBean;
 import dst.ass2.ejb.session.interfaces.IGeneralManagementBean;
+import dst.ass2.ejb.util.EJBUtils;
 
+@Stateless
+@Remote(IGeneralManagementBean.class)
 public class GeneralManagementBean implements IGeneralManagementBean {
 	
-	// TODO
+	private IPriceManagementBean priceManagementBean;
+	
+	public GeneralManagementBean() throws NamingException {
+		priceManagementBean = EJBUtils.lookup(new InitialContext(), PriceManagementBean.class);
+	}
 
 	@Override
 	public void addPrice(Integer nrOfHistoricalTasks, BigDecimal price) {
-		// TODO
+		priceManagementBean.setPrice(nrOfHistoricalTasks, price);
 	}
 
 
@@ -33,6 +46,6 @@ public class GeneralManagementBean implements IGeneralManagementBean {
 
 	@Override
 	public void clearPriceCache() {
-		//TODO
+		priceManagementBean.clearCache();
 	}
 }
