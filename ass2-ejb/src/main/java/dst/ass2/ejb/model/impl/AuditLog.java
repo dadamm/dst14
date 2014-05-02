@@ -21,7 +21,6 @@ public class AuditLog implements IAuditLog {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	// TODO add length parameter
 	@Column(name = "method")
 	private String method;
 

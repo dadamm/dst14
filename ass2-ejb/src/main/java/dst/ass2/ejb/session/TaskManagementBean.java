@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
@@ -26,11 +27,13 @@ import dst.ass1.jpa.model.impl.Task;
 import dst.ass1.jpa.model.impl.TaskProcessing;
 import dst.ass1.jpa.model.impl.User;
 import dst.ass2.ejb.dto.AssignmentDTO;
+import dst.ass2.ejb.interceptor.AuditInterceptor;
 import dst.ass2.ejb.session.exception.AssignmentException;
 import dst.ass2.ejb.session.interfaces.ITaskManagementBean;
 
 @Stateful
 @Remote(ITaskManagementBean.class)
+@Interceptors({AuditInterceptor.class})
 public class TaskManagementBean implements ITaskManagementBean {
 	
 	@PersistenceContext private EntityManager entityManager;
