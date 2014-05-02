@@ -34,7 +34,6 @@ public class AuditInterceptor {
 				auditParameter.setType(parameters[i] == null ? "null" : parameters[i].getClass().toString());
 				auditParameter.setValue(parameters[i] == null ? "null": parameters[i].toString());
 				auditParameters.add(auditParameter);
-//				entityManager.persist(auditParameter);
 			}
 			auditLog.setParameters(auditParameters);
 		}
