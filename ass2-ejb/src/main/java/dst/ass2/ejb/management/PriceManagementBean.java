@@ -30,8 +30,8 @@ public class PriceManagementBean implements IPriceManagementBean {
 	@PostConstruct
 	private void initPriceMap() {
 		@SuppressWarnings("unchecked")
-		List<Price> prices = entityManager.createQuery("select p from Price p").getResultList();
-		for(Price price : prices) {
+		List<IPrice> prices = entityManager.createQuery("select p from Price p").getResultList();
+		for(IPrice price : prices) {
 			priceMap.put(price.getNrOfHistoricalTasks(), price);
 		}
 	}
@@ -54,7 +54,7 @@ public class PriceManagementBean implements IPriceManagementBean {
 				entityManager.persist(p);
 			}
 		} else {
-			Price p = new Price();
+			IPrice p = new Price();
 			p.setNrOfHistoricalTasks(nrOfHistoricalTasks);
 			p.setPrice(price);
 			entityManager.persist(p);
