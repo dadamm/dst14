@@ -23,9 +23,8 @@ public class SimulatorBean {
 	@PersistenceContext private EntityManager entityManager;
 	
 	private Integer getProcessingTime(Date start, Date end) {
-		int startTime = new Long(start.getTime()).intValue();
-		int endTime = new Long(end.getTime()).intValue();
-		return endTime - startTime;
+		Long result = end.getTime() - start.getTime();
+		return result.intValue();
 	}
 	
 	@Schedule(hour = "*", minute = "*", second = "*/5")
