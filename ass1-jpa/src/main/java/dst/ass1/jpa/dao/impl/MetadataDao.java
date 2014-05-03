@@ -31,7 +31,7 @@ public class MetadataDao implements IMetadataDAO {
 	public List<IMetadata> findAll() {
 		logger.trace("call findAll method in MetadataDao");
 		@SuppressWarnings("unchecked")
-		List<IMetadata> list = (List<IMetadata>) session.createCriteria(Metadata.class).list();
+		List<IMetadata> list = session.createCriteria(Metadata.class).list();
 		return list;
 	}
 

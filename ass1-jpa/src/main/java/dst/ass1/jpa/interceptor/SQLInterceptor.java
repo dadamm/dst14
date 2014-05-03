@@ -10,6 +10,7 @@ public class SQLInterceptor extends EmptyInterceptor {
 	
 	private static int selectCount;
 
+	@Override
 	public synchronized String onPrepareStatement(String sql) {
 		if(Pattern.matches("select [A-Za-z0-9,_. ]+ from .*(Expert|TaskForce).*", sql)) {
 			selectCount++;

@@ -31,7 +31,7 @@ public class UserDao implements IUserDAO {
 	public List<IUser> findAll() {
 		logger.trace("call findAll method in UserDao");
 		@SuppressWarnings("unchecked")
-		List<IUser> list = (List<IUser>) session.createCriteria(User.class).list();
+		List<IUser> list = session.createCriteria(User.class).list();
 		return list;
 	}
 

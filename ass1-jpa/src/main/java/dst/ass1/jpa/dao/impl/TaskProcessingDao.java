@@ -31,7 +31,7 @@ public class TaskProcessingDao implements ITaskProcessingDAO {
 	public List<ITaskProcessing> findAll() {
 		logger.trace("call findAll method in TaskProcessingDao");
 		@SuppressWarnings("unchecked")
-		List<ITaskProcessing> list = (List<ITaskProcessing>) session.createCriteria(TaskProcessing.class).list();
+		List<ITaskProcessing> list = session.createCriteria(TaskProcessing.class).list();
 		return list;
 	}
 

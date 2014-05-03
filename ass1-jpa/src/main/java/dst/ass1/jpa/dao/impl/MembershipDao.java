@@ -31,7 +31,7 @@ public class MembershipDao implements IMembershipDAO {
 	public List<IMembership> findAll() {
 		logger.trace("call findAll method in MembershipDao");
 		@SuppressWarnings("unchecked")
-		List<IMembership> list = (List<IMembership>) session.createCriteria(Membership.class).list();
+		List<IMembership> list = session.createCriteria(Membership.class).list();
 		return list;
 	}
 

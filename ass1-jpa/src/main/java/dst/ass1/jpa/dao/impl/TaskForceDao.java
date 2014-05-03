@@ -31,7 +31,7 @@ public class TaskForceDao implements ITaskForceDAO {
 	public List<ITaskForce> findAll() {
 		logger.trace("call findAll method in TaskForceDao");
 		@SuppressWarnings("unchecked")
-		List<ITaskForce> list = (List<ITaskForce>) session.createCriteria(TaskForce.class).list();
+		List<ITaskForce> list = session.createCriteria(TaskForce.class).list();
 		return list;
 	}
 

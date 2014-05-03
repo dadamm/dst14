@@ -12,10 +12,10 @@ import dst.ass1.jpa.model.IExpert;
 import dst.ass1.jpa.model.ITaskForce;
 import dst.ass1.jpa.util.Constants;
 
-//@NamedQuery(
-//		name = "taskforcesOfExpert",
-//		query = "select e from Expert e where firstname like 'Alex%'"
-//)
+@NamedQuery(
+		name = "taskforcesOfExpert",
+		query = "select e from Expert e where firstname like 'Alex%'"
+)
 
 @Entity
 @Table(name = Constants.T_EXPERT)

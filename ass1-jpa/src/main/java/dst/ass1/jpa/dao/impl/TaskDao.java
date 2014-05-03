@@ -38,7 +38,7 @@ public class TaskDao implements ITaskDAO {
 	public List<ITask> findAll() {
 		logger.trace("call findAll method in TaskDao");
 		@SuppressWarnings("unchecked")
-		List<ITask> list = (List<ITask>) session.createCriteria(Task.class).list();
+		List<ITask> list = session.createCriteria(Task.class).list();
 		return list;
 	}
 

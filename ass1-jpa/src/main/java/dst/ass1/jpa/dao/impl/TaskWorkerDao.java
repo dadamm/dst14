@@ -31,7 +31,7 @@ public class TaskWorkerDao implements ITaskWorkerDAO {
 	public List<ITaskWorker> findAll() {
 		logger.trace("call findAll method in TaskWorkerDao");
 		@SuppressWarnings("unchecked")
-		List<ITaskWorker> list = (List<ITaskWorker>) session.createCriteria(TaskWorker.class).list();
+		List<ITaskWorker> list = session.createCriteria(TaskWorker.class).list();
 		return list;
 	}
 

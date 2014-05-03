@@ -34,7 +34,7 @@ public class ExpertDao implements IExpertDAO {
 	public List<IExpert> findAll() {
 		logger.trace("call findAll method in ExpertDao");
 		@SuppressWarnings("unchecked")
-		List<IExpert> list = (List<IExpert>) session.createCriteria(Expert.class).list();
+		List<IExpert> list = session.createCriteria(Expert.class).list();
 		return list;
 	}
 

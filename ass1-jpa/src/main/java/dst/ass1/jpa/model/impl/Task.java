@@ -11,16 +11,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import dst.ass1.jpa.model.IMetadata;
 import dst.ass1.jpa.model.ITask;
 import dst.ass1.jpa.model.ITaskProcessing;
+import dst.ass1.jpa.model.ITaskWorker;
 import dst.ass1.jpa.model.IUser;
 import dst.ass1.jpa.util.Constants;
 
 //@NamedQuery(
 //		name = "allFinishedTasks",
-//		query = "select t from Task t where t.taskProcessing.status =  dst.ass1.jpa.model.TaskStatus.FINISHED"
+//		query = "select t from Task t join t.taskProcessing tp where tp.status =  dst.ass1.jpa.model.TaskStatus.FINISHED"
 //)
 
 @Entity
@@ -31,10 +33,12 @@ public class Task implements ITask {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name = "assignedworkunits")
+//	@Column(name = "assignedworkunits")
+	@Transient
 	private Integer assignedWorkUnits;
 	
-	@Column(name = "processingtime")
+//	@Column(name = "processingtime")
+	@Transient
 	private Integer processingTime;
 	
 	@Column(name = "ispaid")
@@ -64,7 +68,15 @@ public class Task implements ITask {
 
 	@Override
 	public Integer getAssignedWorkUnits() {
-		return this.assignedWorkUnits;
+		if(assignedWorkUnits == null) {
+			int sumWorkUnits = 0;
+			for(ITaskWorker taskWorker : getTaskProcessing().getTaskWorkers()) {
+				sumWorkUnits += taskWorker.getWorkUnitCapacity();
+			}
+			return sumWorkUnits;
+		} else {
+			return this.assignedWorkUnits;
+		}
 	}
 
 	@Override
@@ -74,7 +86,12 @@ public class Task implements ITask {
 
 	@Override
 	public Integer getProcessingTime() {
-		return this.processingTime;
+		if(processingTime == null || processingTime == 0) {
+			Long result = getTaskProcessing().getEnd().getTime() - getTaskProcessing().getStart().getTime();
+			return result.intValue();
+		} else {
+			return this.processingTime;
+		}
 	}
 
 	@Override

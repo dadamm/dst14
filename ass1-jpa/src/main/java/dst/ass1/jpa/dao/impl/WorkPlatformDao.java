@@ -31,7 +31,7 @@ public class WorkPlatformDao implements IWorkPlatformDAO {
 	public List<IWorkPlatform> findAll() {
 		logger.trace("call findAll method in WorkPlatformDao");
 		@SuppressWarnings("unchecked")
-		List<IWorkPlatform> list = (List<IWorkPlatform>) session.createCriteria(WorkPlatform.class).list();
+		List<IWorkPlatform> list = session.createCriteria(WorkPlatform.class).list();
 		return list;
 	}
 
