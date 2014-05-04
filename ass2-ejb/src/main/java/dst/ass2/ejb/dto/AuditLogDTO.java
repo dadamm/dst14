@@ -1,12 +1,12 @@
 package dst.ass2.ejb.dto;
 
-import dst.ass2.ejb.model.IAuditLog;
-import dst.ass2.ejb.model.IAuditParameter;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import dst.ass2.ejb.model.IAuditLog;
+import dst.ass2.ejb.model.IAuditParameter;
 
 public class AuditLogDTO implements Serializable {
 

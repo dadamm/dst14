@@ -17,12 +17,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import dst.ass2.ejb.util.JdbcHelper;
 import dst.ass2.AbstractEJBTest;
 import dst.ass2.ejb.dto.BillDTO;
 import dst.ass2.ejb.dto.BillDTO.BillPerTask;
 import dst.ass2.ejb.session.TaskManagementBean;
 import dst.ass2.ejb.session.interfaces.ITaskManagementBean;
+import dst.ass2.ejb.util.JdbcHelper;
 
 public class Test_Bill extends AbstractEJBTest {
 

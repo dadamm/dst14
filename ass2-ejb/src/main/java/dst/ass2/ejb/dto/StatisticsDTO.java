@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import dst.ass1.jpa.model.ITaskWorker;
 import dst.ass1.jpa.model.ITaskProcessing;
+import dst.ass1.jpa.model.ITaskWorker;
 
 @XmlRootElement(name = "stats")
 public class StatisticsDTO {

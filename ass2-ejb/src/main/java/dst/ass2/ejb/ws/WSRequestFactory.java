@@ -1,6 +1,5 @@
 package dst.ass2.ejb.ws;
 
-import dst.ass2.ejb.ws.IGetStatsRequest;
 import dst.ass2.ejb.ws.impl.GetStatsRequest;
 
 /**

@@ -1,6 +1,27 @@
 package dst.ass2.util;
 
-import static dst.ass2.util.SQLQueries.*;
+import static dst.ass2.util.SQLQueries.ALL_PLATFORM_IDS;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_EXPERT_1;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_EXPERT_2;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_FINISHED_PROCESSING;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_MEMBERSHIP;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_METADATA;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_PRICES;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_PROCESSING;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_TASK;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_TASKFORCE;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_TASKS;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_TASKWORKER;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_USER_1;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_USER_2;
+import static dst.ass2.util.SQLQueries.SQL_COUNT_WORKPLATFORM;
+import static dst.ass2.util.SQLQueries.SQL_GET_ALL_PAID_TASKS_FOR_USER;
+import static dst.ass2.util.SQLQueries.SQL_GET_ALL_TASKS;
+import static dst.ass2.util.SQLQueries.SQL_GET_SETTINGS_FOR_TASK;
+import static dst.ass2.util.SQLQueries.SQL_IS_PRICE_AVAILABLE;
+import static dst.ass2.util.SQLQueries.SQL_PRICE_TABLE_NAME;
+import static dst.ass2.util.SQLQueries.SQL_PROCESSING_TABLE_NAME;
+import static dst.ass2.util.SQLQueries.SQL_TASK_TABLE_NAME;
 import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
