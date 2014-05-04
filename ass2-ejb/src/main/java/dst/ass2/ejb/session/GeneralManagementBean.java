@@ -111,14 +111,14 @@ public class GeneralManagementBean implements IGeneralManagementBean {
 		
 		for(ITask task : getUnpaidTasks(user.getUsername())) {
 			
-			BigDecimal processingTimeMin = new BigDecimal(task.getProcessingTime()).divide(new BigDecimal(60000), 2, RoundingMode.HALF_UP);
-			BigDecimal cs = priceManagementBean.getPrice(getSumOfPaidTasks(user.getUsername()).intValue());
+			BigDecimal processingTimeMin = new BigDecimal(task.getProcessingTime()).divide(new BigDecimal(60000), 0, RoundingMode.HALF_UP);
+			BigDecimal cs = priceManagementBean.getPrice(getSumOfPaidTasks(user.getUsername()).intValue()).setScale(2, RoundingMode.HALF_UP);
 			IWorkPlatform workPlatform = null;
 			for(ITaskWorker taskWorker : task.getTaskProcessing().getTaskWorkers()) {
 				workPlatform = taskWorker.getTaskForce().getWorkPlatform();
 			}
 			BigDecimal cp = workPlatform.getCostsPerWorkUnit().multiply(processingTimeMin).setScale(2, RoundingMode.HALF_UP);
-			BigDecimal discount = getMembershipDiscount(user, workPlatform).setScale(2, RoundingMode.HALF_UP);
+			BigDecimal discount = getMembershipDiscount(user, workPlatform);
 			BigDecimal result = cs.add(cp).multiply(new BigDecimal(1).subtract(discount)).setScale(2, RoundingMode.HALF_UP);
 			
 			BillPerTask billPerTask = billDTO.new BillPerTask();
@@ -135,7 +135,7 @@ public class GeneralManagementBean implements IGeneralManagementBean {
 		}
 		entityManager.flush();
 		billDTO.setBills(billPerTasks);
-		billDTO.setTotalPrice(totalPrice.setScale(2, RoundingMode.HALF_UP));
+		billDTO.setTotalPrice(totalPrice);
 		
 		return new AsyncResult<BillDTO>(billDTO);
 	}

@@ -77,6 +77,8 @@ public class BackgroundWebServiceTest {
 		}
 		assertNotNull("No parameter is annotated with @WebParam", webParam);
 
+		System.out.println("Operation name: " + webMethod.operationName());
+		System.out.println("Param name: " + webParam.partName());
 		assertTrue("The WSDL does not use a SOAP header as input to the operation.", matches(getWsdl(),
 				String.format(".*<soap:header.+message=\"tns:%s\".+part=\"%s\".+", webMethod.operationName(), webParam.partName())));
 	}

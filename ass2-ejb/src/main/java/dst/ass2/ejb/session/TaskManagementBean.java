@@ -14,6 +14,7 @@ import javax.ejb.Stateful;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import dst.ass1.jpa.model.IMetadata;
@@ -112,6 +113,8 @@ public class TaskManagementBean implements ITaskManagementBean {
 			}
 		} catch (NoSuchAlgorithmException e) {
 			throw new AssignmentException("Not possible to generate md5.", e);
+		} catch (NoResultException e) {
+			throw new AssignmentException("Cannot log in. Wrong username or password.", e);
 		}
 	}
 
