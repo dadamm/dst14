@@ -7,12 +7,10 @@ import java.lang.instrument.IllegalClassFormatException;
 import java.lang.instrument.Instrumentation;
 import java.security.ProtectionDomain;
 
-import javassist.ByteArrayClassPath;
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtConstructor;
-import javassist.NotFoundException;
 import dst.ass2.di.annotation.Component;
 
 public class InjectorAgent implements ClassFileTransformer {
@@ -36,11 +34,9 @@ public class InjectorAgent implements ClassFileTransformer {
 		String modifiedClassName = className.replaceAll("/", ".");
 		
 		ClassPool classPool = ClassPool.getDefault();
-//		classPool.insertClassPath(new ByteArrayClassPath(modifiedClassName, classfileBuffer));
 		CtClass ctClass;
 		try {
 			ctClass = classPool.makeClass(new ByteArrayInputStream(classfileBuffer));
-//			ctClass = classPool.get(modifiedClassName);
 			
 			Component componentAnnotation = (Component) ctClass.getAnnotation(Component.class);
 			
@@ -61,8 +57,6 @@ public class InjectorAgent implements ClassFileTransformer {
 			throw new IllegalClassFormatException(e.getMessage());
 		} catch (ClassNotFoundException e) {
 			throw new IllegalClassFormatException(e.getMessage());
-//		} catch (NotFoundException e) {
-//			throw new IllegalClassFormatException(e.getMessage());
 		}
 
 	}

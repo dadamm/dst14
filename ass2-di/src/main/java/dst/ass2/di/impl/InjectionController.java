@@ -33,7 +33,7 @@ public class InjectionController implements IInjectionController {
 		return null;
 	}
 	
-	private List<Field> getAllFields(Class<?> clazz, List<Field> fields) {
+	protected List<Field> getAllFields(Class<?> clazz, List<Field> fields) {
 		Class<?> c = clazz.getSuperclass();
 		if(c != null) {
 			getAllFields(c, fields);
@@ -42,8 +42,12 @@ public class InjectionController implements IInjectionController {
 		return fields;
 	}
 	
-	private void setComponentId(Object obj) throws IllegalArgumentException, IllegalAccessException {
-		long id = id_seq.getAndIncrement();
+	protected long getId() {
+		return id_seq.getAndIncrement();
+	}
+	
+	protected void setComponentId(Object obj) throws IllegalArgumentException, IllegalAccessException {
+		long id = getId();
 		for(Field field : getAllFields(obj.getClass(), new LinkedList<Field>())) {
 			Annotation annotation = field.getAnnotation(ComponentId.class);
 			if(annotation != null) {

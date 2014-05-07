@@ -1,16 +1,22 @@
 package dst.ass2.di;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Collection;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import dst.ass2.di.type.Container;
 import dst.ass2.di.type.Invalid;
 import dst.ass2.di.type.SimpleComponent;
 import dst.ass2.di.type.SimpleSingleton;
 import dst.ass2.di.util.InjectionUtils;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.Collection;
-
-import static org.junit.Assert.*;
 
 public class BasicInjectionTest {
 	private IInjectionController ic;

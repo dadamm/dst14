@@ -1,10 +1,8 @@
 package dst.ass2.di.util;
 
-import dst.ass2.di.annotation.Component;
-import dst.ass2.di.annotation.ComponentId;
-import dst.ass2.di.annotation.Inject;
-import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.util.Assert;
+import static org.springframework.util.ReflectionUtils.doWithFields;
+import static org.springframework.util.ReflectionUtils.getField;
+import static org.springframework.util.ReflectionUtils.makeAccessible;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -12,7 +10,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.springframework.util.ReflectionUtils.*;
+import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.util.Assert;
+import org.springframework.util.ReflectionUtils.FieldCallback;
+import org.springframework.util.ReflectionUtils.FieldFilter;
+
+import dst.ass2.di.annotation.Component;
+import dst.ass2.di.annotation.ComponentId;
+import dst.ass2.di.annotation.Inject;
 
 /**
  * Contains some utilities for testing dependency injection.
