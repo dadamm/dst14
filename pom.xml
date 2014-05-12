@@ -223,6 +223,10 @@
 				<module>ass2-di</module>
 				<module>ass2-ejb</module>
 				<module>ass2-ws</module>
+				<module>ass3-aop</module>
+				<module>ass3-event</module>
+				<module>ass3-jms</module>
+				<module>ass3-shared</module>
 			</modules>
 		</profile>
 
@@ -353,22 +357,24 @@
 		</profile>
 
 		<profile>
-			<id>default-tools.jar</id>
-			<activation>
-				<property>
-					<name>java.vendor</name>
-					<value>Oracle Corporation</value>
-				</property>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>com.sun</groupId>
-					<artifactId>tools</artifactId>
-					<version>1.6.0</version>
-					<scope>system</scope>
-					<systemPath>${java.home}/../lib/tools.jar</systemPath>
-				</dependency>
-			</dependencies>
+			<id>ass3-aop</id>
+			<modules>
+				<module>ass3-aop</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>ass3-event</id>
+			<modules>
+				<module>ass3-event</module>
+				<module>ass3-shared</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>ass3-jms</id>
+			<modules>
+				<module>ass3-jms</module>
+				<module>ass3-shared</module>
+			</modules>
 		</profile>
 
 	</profiles>
