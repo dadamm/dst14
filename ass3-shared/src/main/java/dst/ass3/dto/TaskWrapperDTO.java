@@ -37,42 +37,52 @@ public class TaskWrapperDTO implements Serializable, ITaskWrapper {
 		this.complexity = task.getComplexity();
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	@Override
 	public Long getTaskId() {
 		return taskId;
 	}
 
+	@Override
 	public void setTaskId(Long taskId) {
 		this.taskId = taskId;
 	}
 
+	@Override
 	public LifecycleState getState() {
 		return state;
 	}
 
+	@Override
 	public void setState(LifecycleState state) {
 		this.state = state;
 	}
 
+	@Override
 	public String getRatedBy() {
 		return ratedBy;
 	}
 
+	@Override
 	public void setRatedBy(String ratedBy) {
 		this.ratedBy = ratedBy;
 	}
 
+	@Override
 	public Complexity getComplexity() {
 		return complexity;
 	}
 
+	@Override
 	public void setComplexity(Complexity complexity) {
 		this.complexity = complexity;
 	}
