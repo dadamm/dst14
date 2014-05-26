@@ -33,8 +33,9 @@ import dst.ass2.ejb.ws.impl.GetStatsResponse;
 @WebService(name = Constants.NAME,
 	serviceName = Constants.SERVICE_NAME,
 	portName = Constants.PORT_NAME,
-	targetNamespace = Constants.NAMESPACE,
-	endpointInterface = "dst.ass2.ejb.session.interfaces.ITaskStatisticsBean")
+	targetNamespace = Constants.NAMESPACE
+//	endpointInterface = "dst.ass2.ejb.session.interfaces.ITaskStatisticsBean"
+	)
 public class TaskStatisticsBean implements ITaskStatisticsBean {
 	
 	@PersistenceContext private EntityManager entityManager;
