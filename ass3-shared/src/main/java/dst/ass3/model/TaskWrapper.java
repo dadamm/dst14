@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import dst.ass3.dto.NewTaskWrapperDTO;
+
 @Entity
 public class TaskWrapper implements ITaskWrapper {
 
@@ -36,6 +38,12 @@ public class TaskWrapper implements ITaskWrapper {
 		this.state = state;
 		this.ratedBy = ratedBy;
 		this.complexity = complexity;
+	}
+	
+	public TaskWrapper(NewTaskWrapperDTO newTask) {
+		this.taskId = newTask.getTaskId();
+		this.state = LifecycleState.ASSIGNED;
+		this.complexity = Complexity.UNRATED;
 	}
 
 	@Override

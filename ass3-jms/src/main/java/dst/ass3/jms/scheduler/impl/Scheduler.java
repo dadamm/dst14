@@ -1,42 +1,143 @@
 package dst.ass3.jms.scheduler.impl;
 
-import dst.ass3.jms.scheduler.IScheduler;
+import javax.annotation.Resource;
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
+import javax.jms.MessageProducer;
+import javax.jms.ObjectMessage;
+import javax.jms.Queue;
+import javax.jms.Session;
 
-public class Scheduler implements IScheduler {
+import org.apache.openejb.api.LocalClient;
+
+import dst.ass3.dto.InfoTaskWrapperDTO;
+import dst.ass3.dto.NewTaskWrapperDTO;
+import dst.ass3.dto.ProcessTaskWrapperDTO;
+import dst.ass3.dto.RateTaskWrapperDTO;
+import dst.ass3.dto.TaskWrapperDTO;
+import dst.ass3.jms.JmsConstants;
+import dst.ass3.jms.scheduler.IScheduler;
+import dst.ass3.jms.scheduler.IScheduler.ISchedulerListener.InfoType;
+import dst.ass3.model.LifecycleState;
+
+@LocalClient
+public class Scheduler implements IScheduler, MessageListener {
+	
+	@Resource
+	private ConnectionFactory connectionFactory;
+	private Connection connection;
+	private Session session;
+	
+	@Resource(name = JmsConstants.SCHEDULER_QUEUE)
+	private Queue schedulerQueue;
+	private MessageConsumer schedulerConsumer;
+	
+	@Resource(name = JmsConstants.SERVER_QUEUE)
+	private Queue serverQueue;
+	private MessageProducer serverProducer;
 	
 	private ISchedulerListener schedulerListener;
 	
-	public Scheduler() {
-		
-	}
-
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
+		try {
+			connection = connectionFactory.createConnection();
+			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			
+			serverProducer = session.createProducer(serverQueue);
+			schedulerConsumer = session.createConsumer(schedulerQueue);
+			schedulerConsumer.setMessageListener(this);
+			
+			connection.start();
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
-
+		try {
+			if(schedulerConsumer != null) {
+				schedulerConsumer.close();
+			}
+			if(serverProducer != null) {
+				serverProducer.close();
+			}
+			if(session != null) {
+				session.close();
+			}
+			if(connection != null) {
+				connection.close();
+			}
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void assign(long taskId) {
-		// TODO Auto-generated method stub
-
+		NewTaskWrapperDTO task = new NewTaskWrapperDTO(taskId);
+		try {
+			Message objectMessage = session.createObjectMessage(task);
+			serverProducer.send(objectMessage);
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void info(long taskWrapperId) {
-		// TODO Auto-generated method stub
-
+		InfoTaskWrapperDTO task = new InfoTaskWrapperDTO(taskWrapperId);
+		try {
+			Message objectMessage = session.createObjectMessage(task);
+			serverProducer.send(objectMessage);
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
 	public void setSchedulerListener(ISchedulerListener listener) {
 		this.schedulerListener = listener;
+	}
+
+	@Override
+	public void onMessage(Message message) {
+		ObjectMessage objectMessage = (ObjectMessage) message;
+		try {
+			Object obj = objectMessage.getObject();
+			if(obj instanceof TaskWrapperDTO) {
+				if(objectMessage.getStringProperty(JmsConstants.INFOTYPE_PROPERTY).equals(JmsConstants.INFOTYPE_CREATED_PROPERTY)) {
+					schedulerListener.notify(InfoType.CREATED, (TaskWrapperDTO) obj);
+				} else if(objectMessage.getStringProperty(JmsConstants.INFOTYPE_PROPERTY).equals(JmsConstants.INFOTYPE_INFO_PROPERTY)) {
+					schedulerListener.notify(InfoType.INFO, (TaskWrapperDTO) obj);
+				}
+			} else if (obj instanceof RateTaskWrapperDTO) {
+				RateTaskWrapperDTO rateTask = (RateTaskWrapperDTO) obj;
+				if(rateTask.getState().equals(LifecycleState.PROCESSING_NOT_POSSIBLE)) {
+					schedulerListener.notify(InfoType.DENIED,
+							new TaskWrapperDTO(rateTask.getId(), rateTask.getTaskId(), rateTask.getState(), rateTask.getRatedBy(), rateTask.getComplexity()));
+				}
+			} else if(obj instanceof ProcessTaskWrapperDTO) {
+				ProcessTaskWrapperDTO proccesTask = (ProcessTaskWrapperDTO) obj;
+				schedulerListener.notify(InfoType.PROCESSED,
+						new TaskWrapperDTO(proccesTask.getId(), proccesTask.getTaskId(), proccesTask.getState(), proccesTask.getRatedBy(), proccesTask.getComplexity()));
+			}
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
