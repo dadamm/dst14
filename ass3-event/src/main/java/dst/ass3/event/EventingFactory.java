@@ -4,6 +4,7 @@ import dst.ass3.model.ITaskWrapper;
 import dst.ass3.model.Complexity;
 import dst.ass3.model.LifecycleState;
 import dst.ass3.dto.TaskWrapperDTO;
+import dst.ass3.event.impl.EventProcessing;
 
 /**
  * Factory for instantiating objects used in the eventing tests
@@ -13,10 +14,7 @@ public class EventingFactory {
 
 
 	public static IEventProcessing getInstance() {
-
-		// TODO
-
-		return null;
+		return new EventProcessing();
 	}
 
 	public static ITaskWrapper createTaskWrapper(Long id, Long taskId, LifecycleState state,
