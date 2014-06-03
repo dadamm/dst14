@@ -14,6 +14,8 @@ public class JmsConstants {
 	public static final String INFOTYPE_PROPERTY = "infotype";
 	public static final String INFOTYPE_CREATED_PROPERTY = "CREATED";
 	public static final String INFOTYPE_INFO_PROPERTY = "INFO";
+	public static final String INFOTYPE_DENIED_PROPERTY = "DENIED";
+	public static final String INFOTYPE_PROCESSED_PROPERTY = "PROCESSED";
 	
 	public static final String TASKFORCE_PROPERTY = "taskforce";
 	public static final String COMPLEXITY_PROPERTY = "complexity";

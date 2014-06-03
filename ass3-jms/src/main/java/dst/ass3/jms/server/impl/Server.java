@@ -147,7 +147,8 @@ public class Server implements MessageListener {
 				task.setState(rateTask.getState());
 				entityManager.persist(task);
 				if(task.getState().equals(LifecycleState.PROCESSING_NOT_POSSIBLE)) {
-					ObjectMessage response = session.createObjectMessage(rateTask);
+					ObjectMessage response = session.createObjectMessage(new TaskWrapperDTO(task));
+					response.setStringProperty(JmsConstants.INFOTYPE_PROPERTY, JmsConstants.INFOTYPE_DENIED_PROPERTY);
 					schedulerProducer.send(response);
 				} else if(task.getState().equals(LifecycleState.READY_FOR_PROCESSING)) {
 					ProcessTaskWrapperDTO processTask = new ProcessTaskWrapperDTO(task);
@@ -162,7 +163,8 @@ public class Server implements MessageListener {
 				if(!task.getState().equals(processTask.getState())) {
 					task.setState(processTask.getState());
 					entityManager.persist(task);
-					ObjectMessage response = session.createObjectMessage(processTask);
+					ObjectMessage response = session.createObjectMessage(new TaskWrapperDTO(task));
+					response.setStringProperty(JmsConstants.INFOTYPE_PROPERTY, JmsConstants.INFOTYPE_PROCESSED_PROPERTY);
 					schedulerProducer.send(response);
 				}
 			}

@@ -16,13 +16,10 @@ import org.apache.openejb.api.LocalClient;
 
 import dst.ass3.dto.InfoTaskWrapperDTO;
 import dst.ass3.dto.NewTaskWrapperDTO;
-import dst.ass3.dto.ProcessTaskWrapperDTO;
-import dst.ass3.dto.RateTaskWrapperDTO;
 import dst.ass3.dto.TaskWrapperDTO;
 import dst.ass3.jms.JmsConstants;
 import dst.ass3.jms.scheduler.IScheduler;
 import dst.ass3.jms.scheduler.IScheduler.ISchedulerListener.InfoType;
-import dst.ass3.model.LifecycleState;
 
 @LocalClient
 public class Scheduler implements IScheduler, MessageListener {
@@ -121,17 +118,11 @@ public class Scheduler implements IScheduler, MessageListener {
 					schedulerListener.notify(InfoType.CREATED, (TaskWrapperDTO) obj);
 				} else if(objectMessage.getStringProperty(JmsConstants.INFOTYPE_PROPERTY).equals(JmsConstants.INFOTYPE_INFO_PROPERTY)) {
 					schedulerListener.notify(InfoType.INFO, (TaskWrapperDTO) obj);
+				} else if(objectMessage.getStringProperty(JmsConstants.INFOTYPE_PROPERTY).equals(JmsConstants.INFOTYPE_DENIED_PROPERTY)) {
+					schedulerListener.notify(InfoType.DENIED, (TaskWrapperDTO) obj);
+				} else if(objectMessage.getStringProperty(JmsConstants.INFOTYPE_PROPERTY).equals(JmsConstants.INFOTYPE_PROCESSED_PROPERTY)) {
+					schedulerListener.notify(InfoType.PROCESSED, (TaskWrapperDTO) obj);
 				}
-			} else if (obj instanceof RateTaskWrapperDTO) {
-				RateTaskWrapperDTO rateTask = (RateTaskWrapperDTO) obj;
-				if(rateTask.getState().equals(LifecycleState.PROCESSING_NOT_POSSIBLE)) {
-					schedulerListener.notify(InfoType.DENIED,
-							new TaskWrapperDTO(rateTask.getId(), rateTask.getTaskId(), rateTask.getState(), rateTask.getRatedBy(), rateTask.getComplexity()));
-				}
-			} else if(obj instanceof ProcessTaskWrapperDTO) {
-				ProcessTaskWrapperDTO proccesTask = (ProcessTaskWrapperDTO) obj;
-				schedulerListener.notify(InfoType.PROCESSED,
-						new TaskWrapperDTO(proccesTask.getId(), proccesTask.getTaskId(), proccesTask.getState(), proccesTask.getRatedBy(), proccesTask.getComplexity()));
 			}
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block
