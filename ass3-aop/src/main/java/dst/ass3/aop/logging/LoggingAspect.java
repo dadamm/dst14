@@ -35,11 +35,11 @@ public class LoggingAspect {
 	}
 	
 	@Pointcut("execution(* dst.ass3.aop.IPluginExecutable.execute(..)) && !@annotation(Invisible)")
-	public void execution() {
+	public void procCall() {
 		
 	}
 	
-	@Before("execution()")
+	@Before("procCall()")
 	public void beforeExecution(JoinPoint joinPoint) {
 		Logger logger = null;
 		String message = getLogMessage(joinPoint.getTarget().getClass().getCanonicalName(), " started to execute");
@@ -60,7 +60,7 @@ public class LoggingAspect {
 		}
 	}
 	
-	@After("execution()")
+	@After("procCall()")
 	public void afterExecution(JoinPoint joinPoint) {
 		Logger logger = null;
 		String message = getLogMessage(joinPoint.getTarget().getClass().getCanonicalName(), " is finished");
